@@ -1,0 +1,26 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#b9fedf",
+    "activityBar.background": "#b9fedf",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#c681fd",
+    "activityBarBadge.foreground": "#15202b",
+    "commandCenter.border": "#15202b99",
+    "sash.hoverBorder": "#b9fedf",
+    "statusBar.background": "#87fdc8",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#55fcb1",
+    "statusBarItem.remoteBackground": "#87fdc8",
+    "statusBarItem.remoteForeground": "#15202b",
+    "titleBar.activeBackground": "#87fdc8",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#87fdc899",
+    "titleBar.inactiveForeground": "#15202b99"
+  },
+  "peacock.color": "#87fdc8",
+  "editor.formatOnSave": true,
+  "[php]": {
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+  }
+}

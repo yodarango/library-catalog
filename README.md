@@ -9,26 +9,27 @@ Read on, or see [the Catalog Wiki](https://github.com/psztrnk/catalog/wiki) for 
 ## Features
 
 With Catalog, you can
+
 - add new books with
-	- title,
-	- author(s),
-	- ISBN number,
-	- publisher,
-	- year of publishing,
-	- genre(s),
-	- cover image,
-	- description and
-	- location;
+  - title,
+  - author(s),
+  - ISBN number,
+  - publisher,
+  - year of publishing,
+  - genre(s),
+  - cover image,
+  - description and
+  - location;
 - edit and delete existing books;
 - manage books lent based on
-	- who did you lend it to and
-	- when did you lend it;
+  - who did you lend it to and
+  - when did you lend it;
 - browse your collection based on
-	- authors,
-	- publishers,
-	- years of publishing,
-	- genres and 
-	- lent status;
+  - authors,
+  - publishers,
+  - years of publishing,
+  - genres and
+  - lent status;
 - manage your ebooks with ebook file upload;
 - search your collection based on all fields (simple search) or only certain fields (smart search);
 - protect your data from unwanted eyes with built-in authentication;
@@ -36,29 +37,15 @@ With Catalog, you can
 
 ## Requirements
 
-- PHP 5.4+ with `mod_rewrite` enabled
-- MySql 5.6+
+- PHP 8.0+
+- MySql 8.0+
 
-## Installation
+## DEV
 
-1. Download and unpack the `.zip` or clone this repository.
-2. Rename the top level folder to your liking (eg. `catalog`).
-3. Upload the folder to the desired location on your web server.
-	1. Make sure that your `ebooks` folder's permissions are set to `755`.
-4. Visit the folder in your browser (eg. `http://example.com/catalog`).
-5. Follow the on-screen instructions.
-	1. You don't need to create the database before intallation. Catalog will create it for you with all the necessary tables, if the user you specified has the sufficient previleges.
-	2. If you get a PDO exception stating that your user is not privileged to create the database, head over to your PHPMyAdmin or CPanel and create the database manually. Then enter the name of the database to the setup.
-	3. Please bear in mind, that the database name may only contain fhe following characters: `0-9`, `a-z`, `A-Z`, `$`, `_`.
-6. Click the button and you're done. Have fun.
-7. (See also: [catalog_load-data](https://github.com/psztrnk/catalog_load-data))
-
-## Roadmap
-
-If developed further, the below features will be implemented to future versions of Catalog.
-- [x] Ebook management. Implementing a `doctype`, possibly an upload functionality for ebook files. Would be nice to have a remote backup of my ebooks along with their data (Catalog already has blank columns in the database for this).
-- [ ] Import for books in English (or other languages). While Moly import handles Hungarian books, I'm still to find a proper source for books in other languages (WorldCat? Goodreads? Google Books? Other?). If you have suggestions, don't keep it for yourself.
-- [ ] Multi-user. Currently I don't really see the point in a multi-user application, but who knows. Catalog already has an unused `owner` column in the database.
+1. Set the variables necessary in the `.env` and `config/config.php` file.
+2. Rename the app accordingly
+3. `docker-composer up -d`
+4. Done
 
 ## Third-party code
 

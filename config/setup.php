@@ -2,7 +2,7 @@
 
 <section id="setup">
 
-	<h1>Welcome.</h1>
+	<h1>Welcome.!!!</h1>
 	<p>It looks like you haven't set up Catalog yet, so let's do this right
 		now.</p>
 
