@@ -191,33 +191,6 @@ header#app-header h1 {
 	float: left;
 }
 
-section#menu ul {
-	float: right;
-}
-
-section#menu ul li {
-	list-style: none;
-	display: inline-block;
-	text-transform: uppercase;
-	margin: 6px 0 0 20px;
-	color: #9c9c9c;
-}
-
-section#menu li i {
-	float: left;
-	margin: 5px 3px 0 0;
-}
-
-section#menu a {
-	text-decoration: none;
-	color: #9c9c9c;
-}
-
-section#menu a:hover, section#menu li.active, section#menu li.active a {
-	text-decoration: none;
-	color: #222;
-}
-
 section#content-area {
 	display: block;
 	width: 90%;

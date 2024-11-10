@@ -294,5 +294,3 @@ $lang['HELP_MOLY_API_INSTRUCTIONS'] = '
 <li>Save the file, and you\'re done!</li>
 </ul>
 <p>Now you\'re able to import book data from Moly.</p>';
-
-?>
