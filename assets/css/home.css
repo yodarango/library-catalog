@@ -1,0 +1,498 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700");
+
+/*
+	Hielo by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+*/
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  background: #000;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+  width: 0;
+}
+
+/* Basic */
+
+@-ms-viewport {
+  width: device-width;
+}
+
+body {
+  -ms-overflow-style: scrollbar;
+}
+
+body,
+input,
+select,
+textarea {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 1.6rem;
+  line-height: 1.65;
+}
+
+a {
+  text-decoration: underline;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+strong,
+b {
+  font-weight: 600;
+}
+
+em,
+i {
+  font-style: italic;
+}
+
+p {
+  margin: 0 0 2rem 0;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 300;
+  line-height: 1.5;
+  margin: 0 0 1rem 0;
+}
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h2 {
+  font-size: 1.75rem;
+}
+
+h3 {
+  font-size: 1.35rem;
+}
+
+h4 {
+  font-size: 1.1rem;
+}
+
+h5 {
+  font-size: 0.9rem;
+}
+
+h6 {
+  font-size: 0.7rem;
+}
+
+.header-content h1 {
+  font-size: 1.5rem;
+}
+
+/* Menu */
+.menu-button {
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #333;
+  color: #fff;
+  transition: left 0.3s ease;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+.drawer.open {
+  left: 0; /* Slide in */
+}
+
+/* Drawer Menu Items */
+.drawer h2 {
+  margin-bottom: 1rem;
+}
+
+.drawer ul {
+  list-style-type: none;
+}
+
+.drawer ul li {
+  margin-bottom: 1rem;
+}
+
+.drawer ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+/* Landing */
+.landing {
+  width: 100vw;
+  height: 100vh;
+}
+
+.landing video {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -100;
+  opacity: 0.5;
+}
+.landing .header {
+  width: 100%;
+  z-index: 7;
+  display: flex;
+  position: fixed;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Icon */
+
+.icon {
+  display: block;
+  height: 5rem;
+  width: 5rem;
+}
+
+/* fade in animation */
+/* Add animation styles */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(6rem);
+  transition: opacity 2s ease-out, transform 2s ease-out;
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Header */
+.header {
+  background: rgba(0, 0, 0, 0.975);
+  width: 100%;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+}
+
+.header > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 92%;
+  margin: 0 auto;
+}
+
+.header .logo {
+  background-image: url("/assets/images/logo.webp");
+  background-position: center;
+  background-size: 150%;
+  background-repeat: no-repeat;
+  display: block;
+  width: 8rem;
+  height: 8rem;
+}
+
+/* pastoral team section */
+.info-container {
+  container-type: inline-size;
+  margin: 6.4rem auto;
+  width: 92%;
+  max-width: 120rem;
+}
+
+.info-container > div {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  gap: 3.2rem;
+}
+
+.info-container.reversed > div {
+  flex-direction: row-reverse;
+}
+
+.info-container.full-width > div {
+  display: block;
+}
+
+.info-container.full-width .beliefs > div {
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+  gap: 1.6rem;
+}
+
+.info-container__images {
+  width: calc(35% - 1.6rem);
+}
+
+.info-container__images img {
+  object-position: center;
+  max-height: 100rem;
+  object-fit: cover;
+  display: block;
+  width: 100%;
+}
+
+.info-container__info {
+  width: calc(65% - 1.6rem);
+}
+
+.info-container__info p {
+  font-size: 1.8rem;
+}
+
+.info-container__info h3 {
+  font-size: 3.2rem;
+  font-weight: bold;
+}
+
+@container (max-width: 1000px) {
+  .info-container > div {
+    flex-wrap: wrap;
+  }
+  .info-container > div > div {
+    width: 100%;
+  }
+
+  .info-container__images img {
+    width: 100%;
+    height: 50rem;
+    object-position: top;
+  }
+}
+
+/* In the gap Bible verse */
+.Bible-verse-container {
+  position: relative;
+  background-image: url("/assets/images/green_lights.jpg");
+  background-size: cover;
+  background-position: top center;
+  height: 50rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Bible-verse-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 1;
+}
+
+.Bible-verse-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+}
+
+.Bible-verse-content p {
+  font-size: 2.4rem;
+  text-align: center;
+}
+
+.Bible-verse-content h2 {
+  font-size: 4.8rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+/*  beliefs section */
+.our-beliefs {
+  background-image: url("/assets/images/gap.jpg");
+  background-size: cover;
+  background-position: center;
+  min-height: 50rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+}
+
+.our-beliefs::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 1;
+}
+
+.beliefs {
+  max-width: 120rem;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.beliefs h3 {
+  font-size: 2.4rem;
+  font-weight: bold;
+}
+.beliefs > div {
+  margin-bottom: 2.4rem;
+}
+
+.beliefs > div .fa {
+  flex-shrink: 0;
+  color: #12ffe4;
+  font-size: 6rem;
+  width: 10rem;
+}
+
+/* footer */
+.footer {
+  background-color: black;
+  padding: 2.4rem;
+}
+
+.footer .icons {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 1.6rem;
+}
+
+.footer .icons li a {
+  color: #11e0b0;
+  font-size: 3.2rem;
+  text-decoration: none;
+}
+
+.footer .icons li a:hover {
+  color: #0fb89c;
+}
+
+/* TSCA section */
+.tsca {
+  container-type: inline-size;
+}
+
+.tsca img {
+  max-width: 50rem;
+  display: block;
+  margin: auto;
+}
+
+.tsca h3 {
+  font-size: 2.4rem;
+  font-weight: bold;
+}
+
+.tsca p {
+  margin-bottom: 1.6rem;
+}
+
+.tsca .card {
+  background-color: #000;
+  box-shadow: 0 0.4rem 0.8rem #0fb89c6b;
+  margin: 2rem 0;
+  padding: 1.6rem;
+  transition: transform 0.3s ease;
+}
+
+.tsca .card:hover {
+  transform: translateY(-10px);
+}
+
+.tsca .card h3 {
+  margin-top: 0;
+}
+
+.tsca .card p {
+  margin-bottom: 0;
+}
+
+.info-container__cards {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  gap: 1.6rem;
+}
+
+.info-container__cards > div {
+  width: calc(33.333% - 1.6rem);
+  height: 36rem;
+}
+
+@container (max-width: 1000px) {
+  .info-container__cards {
+    flex-wrap: wrap;
+  }
+  .info-container__cards > div {
+    width: 100%;
+    height: 20rem;
+  }
+}
