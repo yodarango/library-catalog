@@ -167,18 +167,36 @@
 
             <div class="info-container__cards">
                   <div class="card fade-in-up">
-                        <h3>Wisdom</h3>
-                        <p>At Tri-State Christian Academy we believe in the biblical principle, "Train up a child in the way he should go: and when he is old, he will not depart from it." (Proverbs 22:6) Therefore we strive to instill in them biblical values as well as high quality education that will aid them in their growing and for the rest of their lives.</p>
+                        <div class="card-inner">
+                              <div class="card-front">
+                                    <h3>Wisdom</h3>
+                              </div>
+                              <div class="card-back">
+                                    <p>At Tri-State Christian Academy we believe in the biblical principle, "Train up a child in the way he should go: and when he is old, he will not depart from it." (Proverbs 22:6) Therefore we strive to instill in them biblical values as well as high quality education that will aid them in their growing and for the rest of their lives.</p>
+                              </div>
+                        </div>
                   </div>
 
                   <div class="card fade-in-up">
-                        <h3>Integrity</h3>
-                        <p>The righteous who walks in his integrity— blessed are his children after him! (Proverbs:207). We believe in the earthly and eternal rewards of integrity and that education cannot be complete without the study of God's word, therefore, our students not only taught the Word of God but also encouraged to learn for themselves the benefits of studying It and applying It to their lives.</p>
+                        <div class="card-inner">
+                              <div class="card-front">
+                                    <h3>Integrity</h3>
+                              </div>
+                              <div class="card-back">
+                                    <p>The righteous who walks in his integrity— blessed are his children after him! (Proverbs:207). We believe in the earthly and eternal rewards of integrity and that education cannot be complete without the study of God's word, therefore, our students not only taught the Word of God but also encouraged to learn for themselves the benefits of studying It and applying It to their lives.</p>
+                              </div>
+                        </div>
                   </div>
 
                   <div class="card fade-in-up">
-                        <h3>Excellence</h3>
-                        <p>It is our goal at TSCA to do everything "... as for the Lord" (Colossians 3:23). With this in mind we continue to improve on the things we have been doing and prepare to adopt the ones we have not. Not only is our focus that our students receive a good education, but that they receive an excellent education.</p>
+                        <div class="card-inner">
+                              <div class="card-front">
+                                    <h3>Excellence</h3>
+                              </div>
+                              <div class="card-back">
+                                    <p>It is our goal at TSCA to do everything "... as for the Lord" (Colossians 3:23). With this in mind we continue to improve on the things we have been doing and prepare to adopt the ones we have not. Not only is our focus that our students receive a good education, but that they receive an excellent education.</p>
+                              </div>
+                        </div>
                   </div>
             </div>
       </section>
@@ -218,6 +236,14 @@
                   window.addEventListener('resize', checkVisibility);
 
                   checkVisibility();
+            });
+
+            // flip cards
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                  card.addEventListener('click', function() {
+                        card.classList.toggle('flip');
+                  });
             });
       </script>
 </body>

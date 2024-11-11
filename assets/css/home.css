@@ -447,39 +447,52 @@ h6 {
 }
 
 .tsca h3 {
-  font-size: 2.4rem;
+  font-size: 4.8rem;
   font-weight: bold;
 }
 
 .tsca p {
   margin-bottom: 1.6rem;
 }
-
 .tsca .card {
-  background-color: #000;
-  box-shadow: 0 0.4rem 0.8rem #0fb89c6b;
-  margin: 2rem 0;
-  padding: 1.6rem;
-  transition: transform 0.3s ease;
+  perspective: 100rem;
+  margin: 2rem;
+  cursor: pointer;
 }
 
-.tsca .card:hover {
-  transform: translateY(-10px);
+.tsca .card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
 }
 
-.tsca .card h3 {
-  margin-top: 0;
+.tsca .card.flip .card-inner {
+  transform: rotateY(180deg);
 }
 
-.tsca .card p {
-  margin-bottom: 0;
-}
-
-.info-container__cards {
-  justify-content: center;
-  align-items: center;
+.tsca .card-front,
+.tsca .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.25);
+  padding: 20px;
   display: flex;
-  gap: 1.6rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.tsca .card-front {
+  background-color: #000;
+}
+
+.tsca .card-back {
+  background-color: #000;
+  transform: rotateY(180deg);
 }
 
 .info-container__cards > div {
