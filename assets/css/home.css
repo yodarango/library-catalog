@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lobster&display=swap");
 
 /*
 	Hielo by TEMPLATED
@@ -71,18 +71,18 @@ i {
 }
 
 p {
+  margin: 0 0 1rem 0;
+  font-weight: 300;
   margin: 0 0 2rem 0;
 }
 
-p,
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-weight: 300;
-  line-height: 1.5;
+  font-weight: bold;
   margin: 0 0 1rem 0;
 }
 
@@ -96,16 +96,22 @@ h6 a {
   text-decoration: none;
 }
 
+h1 {
+  font-family: "Lobster", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 h2 {
-  font-size: 1.75rem;
+  font-size: 4.8rem;
 }
 
 h3 {
-  font-size: 1.35rem;
+  font-size: 3.2rem;
 }
 
 h4 {
-  font-size: 1.1rem;
+  font-size: 2.4rem;
 }
 
 h5 {
@@ -122,7 +128,7 @@ h6 {
 
 /* Menu */
 .menu-button {
-  font-size: 1.5rem;
+  font-size: 4rem;
   cursor: pointer;
   padding: 0.5rem 1rem;
   color: #fff;
@@ -131,22 +137,47 @@ h6 {
   background-color: transparent;
   outline: none;
   border: none;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .menu-button {
+    font-size: 3rem;
+  }
 }
 
 .drawer {
   position: fixed;
   top: 0;
-  left: -250px;
-  width: 250px;
+  left: -80%;
+  width: 80%;
+  max-width: 50rem;
   height: 100%;
-  background-color: #333;
+  background-color: #000;
   color: #fff;
   transition: left 0.3s ease;
   box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
+  padding-top: 5rem;
+  z-index: 10;
 }
 
 .drawer.open {
-  left: 0; /* Slide in */
+  left: 0;
+}
+
+@media (max-width: 768px) {
+  .drawer {
+    transition: right 0.3s ease;
+    right: -80%;
+    left: auto;
+  }
+
+  .drawer.open {
+    left: auto;
+    right: 0;
+  }
 }
 
 /* Drawer Menu Items */
@@ -156,16 +187,23 @@ h6 {
 
 .drawer ul {
   list-style-type: none;
+  padding: 0 1.6rem;
 }
 
 .drawer ul li {
   margin-bottom: 1rem;
 }
 
+.drawer ul li:hover {
+  transform: skew(-20deg, 0);
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
 .drawer ul li a {
   color: #fff;
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: 4rem;
 }
 
 .close-button {
@@ -174,15 +212,29 @@ h6 {
   color: #fff;
   font-size: 1.5rem;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 2.4rem;
+  right: 2.4rem;
   cursor: pointer;
+}
+
+.close-button i {
+  font-size: 4rem;
+  color: inherit;
 }
 
 /* Landing */
 .landing {
   width: 100vw;
   height: 100vh;
+}
+.landing h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  font-size: 8.4rem;
+  text-align: center;
 }
 
 .landing video {
@@ -252,6 +304,13 @@ h6 {
   height: 8rem;
 }
 
+@media (max-width: 768px) {
+  .header .logo {
+    width: 5rem;
+    height: 5rem;
+  }
+}
+
 /* pastoral team section */
 .info-container {
   container-type: inline-size;
@@ -302,12 +361,7 @@ h6 {
   font-size: 1.8rem;
 }
 
-.info-container__info h3 {
-  font-size: 3.2rem;
-  font-weight: bold;
-}
-
-@container (max-width: 1000px) {
+@container (max-width: 800px) {
   .info-container > div {
     flex-wrap: wrap;
   }
@@ -349,6 +403,8 @@ h6 {
   position: relative;
   z-index: 2;
   color: white;
+  width: 92%;
+  max-width: 120rem;
 }
 
 .Bible-verse-content p {
@@ -360,6 +416,13 @@ h6 {
   font-size: 4.8rem;
   text-align: center;
   font-weight: bold;
+}
+
+.info-container.our-story .info-container__images .our-story-image {
+  object-fit: contain;
+  max-width: 30rem;
+  margin: auto;
+  height: auto;
 }
 
 /*  beliefs section */
@@ -374,6 +437,18 @@ h6 {
   width: 100%;
   max-width: 100%;
   position: relative;
+  padding: 6.4rem 0;
+}
+
+.our-beliefs .beliefs {
+  width: 120rem;
+  width: 92%;
+}
+
+@media (max-width: 768px) {
+  .our-beliefs {
+    background-position: top center;
+  }
 }
 
 .our-beliefs::before {
@@ -385,6 +460,12 @@ h6 {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.75);
   z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .our-beliefs::before {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
 }
 
 .beliefs {
@@ -407,6 +488,13 @@ h6 {
   color: #12ffe4;
   font-size: 6rem;
   width: 10rem;
+}
+
+@media (max-width: 768px) {
+  .beliefs > div .fa {
+    font-size: 3rem;
+    width: 3rem;
+  }
 }
 
 /* footer */
@@ -440,10 +528,22 @@ h6 {
   container-type: inline-size;
 }
 
+.tsca__title {
+  text-align: center;
+  margin-bottom: 2.4rem;
+}
+
 .tsca img {
   max-width: 50rem;
   display: block;
   margin: auto;
+}
+
+@media (max-width: 768px) {
+  .tsca img {
+    max-width: 80%;
+    margin-bottom: 2.4rem;
+  }
 }
 
 .tsca h3 {
@@ -456,7 +556,6 @@ h6 {
 }
 .tsca .card {
   perspective: 100rem;
-  margin: 2rem;
   cursor: pointer;
 }
 
@@ -490,6 +589,10 @@ h6 {
   background-color: #000;
 }
 
+.card-front h3 {
+  text-align: center;
+}
+
 .tsca .card-back {
   background-color: #000;
   transform: rotateY(180deg);
@@ -500,12 +603,176 @@ h6 {
   height: 36rem;
 }
 
-@container (max-width: 1000px) {
+.tsca .card-image {
+  width: 50%;
+  width: 20rem;
+  height: auto;
+  margin-bottom: 1.6rem;
+}
+
+@container (max-width: 800px) {
   .info-container__cards {
     flex-wrap: wrap;
   }
   .info-container__cards > div {
     width: 100%;
-    height: 20rem;
+    height: 40rem;
+  }
+}
+
+/* modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 12;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.modal-content {
+  background-color: #000;
+  margin: 6.4rem auto 0;
+  padding: 1.6rem;
+  width: 90%;
+  max-width: 50rem;
+  border: 0.5px solid #ffffffa6;
+}
+
+.close-button-modal {
+  color: #000;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  border: none;
+  outline: none;
+}
+
+.close-button-modal:hover,
+.close-button-modal:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.open-modal-button {
+  background-color: #1f846d;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  display: block;
+  margin-top: 1.6rem;
+}
+
+.open-modal-button:hover {
+  background-color: #1f846d;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal form label {
+  margin-top: 10px;
+}
+
+.modal form input,
+.modal form textarea {
+  padding: 10px;
+  margin-top: 5px;
+  background-color: #fff;
+  border: none;
+  outline: none;
+}
+
+.modal form input:focus,
+.modal form textarea:focus {
+  border: 1px solid #12ffe4;
+  box-shadow: 0 0 5px #12ffe4;
+}
+
+.modal form button {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #1f846d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal form button:hover {
+  background-color: #1f846d;
+}
+
+/* Toast styles */
+.toast {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 13;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+.toast.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
   }
 }

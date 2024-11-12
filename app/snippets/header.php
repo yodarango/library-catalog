@@ -41,7 +41,7 @@ if (logged_in() == false) {
 		<link href="./assets/icons/icon-hires.png" rel="icon" sizes="192x192" />
 		<link href="./assets/icons/icon-normal.png" rel="icon" sizes="128x128" />
 
-		<!-- <link rel="stylesheet" href="assets/css/index.css"> -->
+		<link rel="stylesheet" href="assets/css/index_DEL.css">
 		<link rel="stylesheet" href="assets/css/font-awesome.min.css">
 		<link rel="stylesheet" href="assets/css/library.css">
 
