@@ -1,4 +1,4 @@
-<?php include_once('snippets/header.php') ?>
+<?php include_once('snippets/library_header.php') ?>
 
 <h2>
 	<i class="fa fa-question-circle" aria-hidden="true"></i><?php echo $lang['HELP_TITLE']; ?>
@@ -16,29 +16,35 @@
 	</ul>
 
 	<h3>
-		<a name="molyapi"></a><?php echo $lang['HELP_MOLY_TITLE']; ?></h3>
-<?php echo $lang['HELP_MOLY_API_INSTRUCTIONS']; ?>
+		<a name="molyapi"></a><?php echo $lang['HELP_MOLY_TITLE']; ?>
+	</h3>
+	<?php echo $lang['HELP_MOLY_API_INSTRUCTIONS']; ?>
 
-<h3>
-		<a name="upgrade"></a><?php echo $lang['HELP_UPGRADE_TITLE']; ?></h3>
-<?php echo $lang['HELP_UPGRADE_CONTENT']; ?>
+	<h3>
+		<a name="upgrade"></a><?php echo $lang['HELP_UPGRADE_TITLE']; ?>
+	</h3>
+	<?php echo $lang['HELP_UPGRADE_CONTENT']; ?>
 
-<h3>
-		<a name="search"></a><?php echo $lang['HELP_SEARCH_TITLE']; ?></h3>
-<?php echo $lang['HELP_SEARCH_CONTENT']; ?>
+	<h3>
+		<a name="search"></a><?php echo $lang['HELP_SEARCH_TITLE']; ?>
+	</h3>
+	<?php echo $lang['HELP_SEARCH_CONTENT']; ?>
 
-<h3>
-		<a name="translate"></a><?php echo $lang['HELP_TRANSLATE_TITLE']; ?></h3>
-<?php echo $lang['HELP_TRANSLATE_CONTENT']; ?>
+	<h3>
+		<a name="translate"></a><?php echo $lang['HELP_TRANSLATE_TITLE']; ?>
+	</h3>
+	<?php echo $lang['HELP_TRANSLATE_CONTENT']; ?>
 
-<h3>
-		<a name="contribute"></a><?php echo $lang['HELP_CONTRIBUTE_TITLE']; ?></h3>
-<?php echo $lang['HELP_CONTRIBUTE_CONTENT']; ?>
+	<h3>
+		<a name="contribute"></a><?php echo $lang['HELP_CONTRIBUTE_TITLE']; ?>
+	</h3>
+	<?php echo $lang['HELP_CONTRIBUTE_CONTENT']; ?>
 
-<h3>
-		<a name="donate"></a><?php echo $lang['HELP_DONATE_TITLE']; ?></h3>
-<?php echo $lang['HELP_DONATE_CONTENT']; ?>
-<div id="paypal-donate">
+	<h3>
+		<a name="donate"></a><?php echo $lang['HELP_DONATE_TITLE']; ?>
+	</h3>
+	<?php echo $lang['HELP_DONATE_CONTENT']; ?>
+	<div id="paypal-donate">
 		<form action="https://www.paypal.com/cgi-bin/webscr" method="post"
 			target="_top">
 			<input type="hidden" name="cmd" value="_s-xclick"> <input
@@ -52,9 +58,9 @@
 				width="1" height="1">
 		</form>
 	</div>
-<?php echo $lang['HELP_CATALOG_CREDITS']; ?>
+	<?php echo $lang['HELP_CATALOG_CREDITS']; ?>
 
-    <div class="clear"></div>
+	<div class="clear"></div>
 
 </div>
 

@@ -1,4 +1,4 @@
-<?php include('./app/snippets/header-setup.php') ?>
+<?php include('./app/snippets/library_header-setup.php') ?>
 
 <section id="setup">
 
@@ -26,7 +26,7 @@
 		<select name="language" id="language">
 			<option value="" selected>Select language</option>
 			<option value="en-US">English (United States)</option>
-  			<option value="hu-HU">Magyar (Hungarian)</option>
+			<option value="hu-HU">Magyar (Hungarian)</option>
 		</select>
 		<p>All done? Excellent. Click on the button, to start configuration.
 			Have fun using Catalog.</p>
@@ -34,23 +34,26 @@
 	</form>
 
 	<script type="text/javascript">
-			function mouseoverPass(obj) {
-				var obj = document.getElementById('password');
-				obj.type = "text";
-			}
-			function mouseoutPass(obj) {
-				var obj = document.getElementById('password');
-				obj.type = "password";
-			}
-			function appmouseoverPass(obj) {
-				var obj = document.getElementById('apppassword');
-				obj.type = "text";
-			}
-			function appmouseoutPass(obj) {
-				var obj = document.getElementById('apppassword');
-				obj.type = "password";
-			}
-		</script>
+		function mouseoverPass(obj) {
+			var obj = document.getElementById('password');
+			obj.type = "text";
+		}
+
+		function mouseoutPass(obj) {
+			var obj = document.getElementById('password');
+			obj.type = "password";
+		}
+
+		function appmouseoverPass(obj) {
+			var obj = document.getElementById('apppassword');
+			obj.type = "text";
+		}
+
+		function appmouseoutPass(obj) {
+			var obj = document.getElementById('apppassword');
+			obj.type = "password";
+		}
+	</script>
 
 </section>
 

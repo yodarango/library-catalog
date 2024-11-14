@@ -6,3 +6,12 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 # Otherwise, rewrite the URL to add .php extension
 RewriteRule ^(.*)$ $1.php [L]
+
+
+
+# Se il file o la directory esistono, servili direttamente
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+
+# # Altrimenti, reindirizza tutto a index.php per il routing
+# RewriteRule ^(.*)$ index.php [QSA,L]

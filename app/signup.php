@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once('app/snippets/header-setup.php');
+include_once('app/snippets/library_header-setup.php');
 include_once('config/config.php');
 include_once('toolkit/bootstrap.php');
 

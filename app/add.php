@@ -1,4 +1,4 @@
-<?php include_once('snippets/header.php') ?>
+<?php include_once('snippets/library_header.php') ?>
 
 <h2>
     <i class="fa fa-plus" aria-hidden="true"></i><?php echo $lang['ADD_TITLE']; ?>

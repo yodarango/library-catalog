@@ -64,7 +64,7 @@ if (isset($_POST['submit'])) {
     }
 }
 
-include_once('app/snippets/header-setup.php');
+include_once('app/snippets/library_header-setup.php');
 ?>
 
 <section id="setup">

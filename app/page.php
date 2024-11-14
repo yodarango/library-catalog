@@ -1,27 +1,27 @@
-<?php include_once('snippets/header.php') ?>
+<?php include_once('snippets/library_header.php') ?>
 
 <h2>
-	<i class="fa fa-book" aria-hidden="true"></i><?php echo $lang['INDEX_TITLE']; ?>
+    <i class="fa fa-book" aria-hidden="true"></i><?php echo $lang['INDEX_TITLE']; ?>
 </h2>
 
 <div id="item-list">
 
-	<table class="item-list-table">
-        <?php include_once ('snippets/table-head.php');?>
+    <table class="item-list-table">
+        <?php include_once('snippets/table-head.php'); ?>
 
         <tbody>
             <?php
             $url = $_SERVER['REQUEST_URI'];
             $id = parse_url($url, PHP_URL_QUERY);
             ?>
-                        
-                        <?php include_once('snippets/collection.php') ?>
 
-                        </tbody>
-	</table>
+            <?php include_once('snippets/collection.php') ?>
+
+        </tbody>
+    </table>
     <?php
     if ($books->pagination()->hasPages()) {
-        
+
         if ($books->pagination()->hasPrevPage()) {
             if ($id == '') {
                 $pagenum = '1';
