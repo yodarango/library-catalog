@@ -49,11 +49,11 @@ if (logged_in() == false) {
 		<link href="./assets/icons/icon-hires.png" rel="icon" sizes="192x192" />
 		<link href="./assets/icons/icon-normal.png" rel="icon" sizes="128x128" />
 
-		<!-- <link rel="stylesheet" href="assets/css/index_DEL.css"> -->
 		<link rel="stylesheet" type="text/css" href="https://cdn.danielrangel.net/fullds.min.css">
 		<!-- TODO: sostituie questo con i miei iconi -->
 		<link rel="stylesheet" href="assets/css/font-awesome.min.css">
 		<link rel="stylesheet" href="assets/css/library.css">
+		<link rel="stylesheet" href="assets/css/app.css">
 		<title>Library</title>
 	</head>
 

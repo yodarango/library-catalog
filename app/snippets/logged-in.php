@@ -8,8 +8,20 @@ function logged_in()
     }
 }
 
+function is_admin()
+{
+    if (isset($_SESSION['username']) && isset($_SESSION['user_id'])) {
+        if ($_SESSION['username'] == 'admin') {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
 function redirect_to($url)
 {
     header("Location: {$url}");
 }
-?>

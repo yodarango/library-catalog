@@ -4,6 +4,12 @@
   height: 12rem;
 }
 
+.library-header > div {
+  max-width: 80rem;
+  margin-left: 4%;
+  width: 92%;
+}
+
 .library-content-area {
   border-top-left-radius: 2rem;
   border-top-right-radius: 2rem;
