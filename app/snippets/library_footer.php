@@ -1,3 +1,6 @@
+</div>
+</section>
+</main>
 <?php
 function get_active_class($page)
 {
@@ -22,3 +25,8 @@ function get_active_class($page)
             </li>
       </ul>
 </section>
+<footer class="footer">
+</footer>
+</body>
+
+</html>

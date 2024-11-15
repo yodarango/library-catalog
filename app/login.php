@@ -95,4 +95,4 @@ include_once('app/snippets/library_header-setup.php');
     </script>
 
 </section>
-<?php include_once('app/snippets/footer-setup.php'); ?>
+<?php include_once('app/snippets/library_footer-setup.php'); ?>

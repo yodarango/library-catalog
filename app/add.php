@@ -179,4 +179,4 @@
 
 </div>
 
-<?php include_once('snippets/footer.php') ?>
+<?php include_once('snippets/library_footer.php') ?>

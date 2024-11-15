@@ -95,11 +95,11 @@ $item = $collection->find($bookid);
 			<i class="fa fa-handshake-o" aria-hidden="true"></i> <?php echo $lang['DISPLAY_LENT_NOTE']; ?><?php if ($item->lentto() != '') {
 																				echo $lang['DISPLAY_LENTTO_REF'] . $item->lentto();
 																			} ?><?php if ($item->lentat() != '') {
-																																			echo $lang['DISPLAY_LENTAT_REF'] . $item->lentat();
-																																		} ?>.
+																					echo $lang['DISPLAY_LENTAT_REF'] . $item->lentat();
+																				} ?>.
 		</p>
 	<?php } ?>
 </div>
 
 
-<?php include_once('snippets/footer.php') ?>
+<?php include_once('snippets/library_footer.php') ?>

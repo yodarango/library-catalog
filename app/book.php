@@ -98,33 +98,14 @@ if (strpos($id, 'id=') !== FALSE) {
 				<i class="fa fa-handshake-o" aria-hidden="true"></i> <?php echo $lang['DISPLAY_LENT_NOTE']; ?><?php if ($item->lentto() != '') {
 																					echo $lang['DISPLAY_LENTTO_REF'] . $item->lentto();
 																				} ?><?php if ($item->lentat() != '') {
-																																				echo $lang['DISPLAY_LENTAT_REF'] . $item->lentat();
-																																			} ?>.
+																						echo $lang['DISPLAY_LENTAT_REF'] . $item->lentat();
+																					} ?>.
 			</p>
 		<?php } ?>
 	</div>
 
 <?php
-} else if (strpos($id, 'author=') !== FALSE) {
-
-	include_once('display-author.php');
-} else if (strpos($id, 'publisher=') !== FALSE) {
-
-	include_once('display-publisher.php');
-} else if (strpos($id, 'year=') !== FALSE) {
-
-	include_once('display-year.php');
-} else if (strpos($id, 'genre=') !== FALSE) {
-
-	include_once('display-genre.php');
-} else if (strpos($id, 'lent=on') !== FALSE) {
-
-	include_once('display-lent.php');
-} else if (strpos($id, 'doctype=ebook') !== FALSE) {
-
-	include_once('display-ebooks.php');
 }
 ?>
 
-
-<?php include_once('snippets/footer.php') ?>
+<?php include_once('snippets/library_footer.php') ?>

@@ -37,7 +37,6 @@ if (logged_in() == false) {
 		<meta charset="ISO-8859-2">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-		<title>Library</title>
 		<meta name="description" content="Personal book catalog">
 		<meta name="keywords" content="book, catalog">
 
@@ -55,7 +54,7 @@ if (logged_in() == false) {
 		<!-- TODO: sostituie questo con i miei iconi -->
 		<link rel="stylesheet" href="assets/css/font-awesome.min.css">
 		<link rel="stylesheet" href="assets/css/library.css">
-
+		<title>Library</title>
 	</head>
 
 	<body>
@@ -66,9 +65,13 @@ if (logged_in() == false) {
 					<a class="library-logo flex-shrink-0" href="index">
 						<img src="assets/icons/favicon.png" alt="Library icon ">
 					</a>
+					<?php
+					$term = $_POST ? $_POST['term'] : "";
+					?>
 					<div class="global-search w-100">
-						<form action="search" id="searchform" method="post" class="d-flex align-items-center justify-content-start column-gap-2">
-							<input class="search-form p-2 rounded w-100 d-block" type="text" name="term" required placeholder="Search for a book" />
+						<form action="library" id="searchform" method="post" class="d-flex align-items-center justify-content-start column-gap-2">
+							<input class="search-form p-2 rounded w-100 d-block" type="text" name="term"
+								placeholder="Search for a book" value="<?php echo $term ?>" />
 							<button class="search-button bg-nu p-0" type="submit"
 								value="Search collection">
 								<i class="fa fa-search" aria-hidden="true"></i>
@@ -78,4 +81,5 @@ if (logged_in() == false) {
 				</div>
 			</header>
 			<section class="library-content-area bg-beta">
-			<?php } ?>
+				<div>
+				<?php } ?>

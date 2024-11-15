@@ -57,4 +57,4 @@
 
 </section>
 
-<?php include('./app/snippets/footer-setup.php') ?>
+<?php include('./app/snippets/library_footer-setup.php') ?>

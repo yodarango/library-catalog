@@ -1,73 +1,60 @@
 <?php
 include_once('snippets/library_header.php');
 
-// Fetch books from the database
-$books = $db->table('books')
-    ->select('books.id', 'books.title', 'books.year', 'books.cover')
-    ->order('title', 'ASC')
-    ->all();
+$term = $_POST ? $_POST['term'] : "";
+
+$collection = $db->table('books');
+
+$books = [];
+
+
+// filter the books if it is a post request
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $books = $db->table('books')
+        ->where('title', 'like', '%' . $term . '%')
+        ->orWhere('description', 'like', '%' . $term . '%')
+        ->orWhere('publisher', 'like', '%' . $term . '%')
+        ->orWhere('isbn', 'like', '%' . $term . '%')
+        ->orWhere('year', 'like', '%' . $term . '%')
+        ->orWhere('a_str', 'like', '%' . $term . '%')
+        ->orWhere('g_str', 'like', '%' . $term . '%')
+        ->orWhere('location', 'like', '%' . $term . '%')
+        ->orWhere('lentto', 'like', '%' . $term . '%')
+        ->orWhere('lentat', 'like', '%' . $term . '%')
+        ->all();
+} else {
+    // or fetch if not filtering
+    $books = $collection
+        ->select(['id', 'title', 'year', 'author', 'imgpath'])
+        ->order('title', 'ASC')
+        ->all();
+}
 
 ?>
 
-<h2>
-    <i class="fa fa-book" aria-hidden="true"></i><?php echo $lang['INDEX_TITLE']; ?>
-</h2>
+<h3 class="mb-4">Browse all <?php echo $books->count() ?> books</h3>
+<div class="item-list">
 
-<div id="item-list">
-
+    <script>
+        console.log("<?php echo $term ?>")
+    </script>
     <?php foreach ($books as $book): ?>
-        <div class="book-card">
-            <div class="book-card-image">
-                <a href="display?id=<?php echo $book->id() ?>">
-                    <img src="images/<?php echo $book->cover() ?>" alt="<?php echo $book->title() ?>">
-                </a>
+        <!-- <?php var_dump($book); ?> -->
+        <a href="book?id=<?php echo $book->id() ?>">
+            <div class="book-card">
+                <div class="book-card-image">
+                    <img src="<?php echo $book->imgpath() ?>" alt="<?php echo $book->title() ?>">
+                </div>
+                <div class="book-card-info p-2 bg-gamma">
+                    <h5 class="color-alpha mb-1 text-center">
+                        <?php echo $book->title(); ?>
+                    </h5>
+                    <p class="color-alpha p-0 color-zeta fs-6 text-center">
+                        <?php echo $book->author(); ?>
+                    </p>
+                </div>
             </div>
-            <div class="book-card-info">
-                <h3>
-                    <a href="display?id=<?php echo $book->id() ?>"><?php echo $book->title() ?></a>
-                </h3>
-                <p>
-                    <?php
-                    $authors = $db->table('authors')
-                        ->select('authors.author', 'authors.book_id')
-                        ->where('authors.book_id = ' . $book->id())
-                        ->order('author', 'ASC')
-                        ->all();
-                    foreach ($authors as $author) {
-                        echo '<a href="display?author=' . urlencode($author->author()) . '">' . $author->author() . '</a><br />';
-                    }
-                    ?>
-                </p>
-                <p>
-                    <?php echo $book->year() ?>
-                </p>
-            </div>
-        </div>
+        </a>
     <?php endforeach; ?>
-
-    <?php
-    if ($books->pagination()->hasPages()) {
-
-        if ($books->pagination()->hasPrevPage()) {
-            if ($id == '') {
-                $pagenum = '1';
-            } else {
-                $pagenum = $id;
-            }
-            $prevpage = $pagenum - 1;
-            echo '<a class="prevpage" href="page?' . $prevpage . '" >&larr; ' . $lang['INDEX_PAGINATION_PREV'] . '</a>';
-        }
-        if ($books->pagination()->hasNextPage()) {
-            if ($id == '') {
-                $pagenum = '1';
-            } else {
-                $pagenum = $id;
-            }
-            $nextpage = $pagenum + 1;
-            echo '<a class="nextpage" href="page?' . $nextpage . '" >' . $lang['INDEX_PAGINATION_NEXT'] . ' &rarr;</a>';
-        }
-    }
-    ?>
 </div>
-
-<?php include_once('snippets/footer.php') ?>
+<?php include_once('snippets/library_footer.php') ?>
