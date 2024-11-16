@@ -8,6 +8,15 @@ function logged_in()
     }
 }
 
+function  get_username()
+{
+    if (isset($_SESSION['username'])) {
+        return $_SESSION['username'];
+    } else {
+        return false;
+    }
+}
+
 function is_admin()
 {
     if (isset($_SESSION['username']) && isset($_SESSION['user_id'])) {

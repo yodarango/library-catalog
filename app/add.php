@@ -1,182 +1,98 @@
-<?php include_once('snippets/library_header.php') ?>
+<?php
+if (isset($_GET['isbn'])) {
+      $isbn = htmlspecialchars($_GET['isbn']);
 
-<h2>
-    <i class="fa fa-plus" aria-hidden="true"></i><?php echo $lang['ADD_TITLE']; ?>
-</h2>
-<div id="item-list">
+      // Google Books API endpoint
+      $api_url = "https://www.googleapis.com/books/v1/volumes?q=isbn:$isbn";
 
-    <?php
+      // Use cURL to fetch data
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, $api_url);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-    require_once('lib/class.file.php');
-    require_once('lib/class.upload.php');
+      $response = curl_exec($ch);
+      curl_close($ch);
 
-    if (isset($_POST['submit'])) { // check if form was submitted
+      // Decode the JSON response
+      $data = json_decode($response, true);
 
-        if (isset($_FILES['files'])) {
-            $validations = array(
-                'category' => array('ebook'), // validate only those files within this list
-                'size' => 20 // maximum of 20mb
-            );
+      if (!empty($data['items'][0])) {
+            $book = $data['items'][0]['volumeInfo'];
 
-            // create new instance
-            $upload = new Upload($_FILES['files'], $validations);
+            // Prepare book details
+            $book_details = [
+                  'title' => $book['title'] ?? 'Unknown',
+                  'authors' => implode(', ', $book['authors'] ?? ['Unknown']),
+                  'publishedDate' => $book['publishedDate'] ?? 'Unknown',
+                  'description' => $book['description'] ?? 'No description available',
+                  'thumbnail' => $book['imageLinks']['thumbnail'] ?? ''
+            ];
 
-            // for each file
-            foreach ($upload->files as $file) {
-                if ($file->validate()) {
-                    // do your thing on this file ...
-                    // ...
-                    // say we don't allow audio files
-                    if ($file->is('audio')) $error = 'Audio not allowed';
-                    else {
-                        // then get base64 encoded string to do something else ...
-                        $filedata = $file->get_base64();
+            // Return as JSON
+            header('Content-Type: application/json');
+            echo json_encode($book_details);
+      } else {
+            echo json_encode(['error' => 'No book found for this ISBN']);
+      }
+      exit();
+}
+?>
 
-                        // or get the GPS info ...
-                        $gps = $file->get_exif_gps();
+<!DOCTYPE html>
+<html lang="en">
 
-                        // then we move it to 'path/to/my/uploads'
-                        $result = $file->put('./ebooks');
-                        $error = $result ? '' : 'Error moving file';
-                    }
-                } else {
-                    // oopps!
-                    $error = $file->get_error();
-                }
-                $filename = $file->name;
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Scan ISBN</title>
+      <script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
+</head>
+
+<body>
+      <h1>Scan ISBN</h1>
+      <div id="reader" style="width: 300px;"></div>
+      <p id="isbn-output"></p>
+      <div id="book-info" style="margin-top: 20px;"></div>
+
+      <script>
+            function onScanSuccess(decodedText, decodedResult) {
+                  // Assume the scanned code is the ISBN
+                  document.getElementById('isbn-output').innerText = `Scanned ISBN: ${decodedText}`;
+
+                  // Send the ISBN to the PHP script
+                  fetch(`?isbn=${decodedText}`)
+                        .then(response => response.json())
+                        .then(data => {
+                              const bookInfoDiv = document.getElementById('book-info');
+                              if (data.error) {
+                                    bookInfoDiv.innerHTML = `<p style="color: red;">Error: ${data.error}</p>`;
+                              } else {
+                                    bookInfoDiv.innerHTML = `
+                            <h2>${data.title}</h2>
+                            <p><strong>Authors:</strong> ${data.authors}</p>
+                            <p><strong>Published Date:</strong> ${data.publishedDate}</p>
+                            <p><strong>Description:</strong> ${data.description}</p>
+                            ${
+                                data.thumbnail
+                                    ? `<img src="${data.thumbnail}" alt="Book Thumbnail" style="max-width: 200px;">`
+                                    : ''
+                            }
+                        `;
+                              }
+                        })
+                        .catch(error => console.error('Error fetching book details:', error));
             }
-        }
 
-
-        // =========================== UPLOAD
-
-        $collection = $db->table('books');
-
-        $insert_author = mb_convert_encoding($_POST['author'], 'UTF-8', 'auto');
-        $insert_title = $_POST['title'];
-        $insert_isbn = $_POST['isbn'];
-        $insert_publisher = $_POST['publisher'];
-        $insert_year = $_POST['year'];
-        $insert_description = $_POST['description'];
-        $insert_genre = $_POST['genre'];
-        $insert_imgpath = $_POST['imgpath'];
-        $insert_owner = $_SESSION['user_id'];
-        if (isset($filename)) {
-            $insert_filename = $filename;
-        } else {
-            $insert_filename = NULL;
-        }
-
-        // insert the book into the db
-        if ($id = $collection->insert(array(
-            'title' => $insert_title,
-            'isbn' => $insert_isbn,
-            'publisher' => $insert_publisher,
-            'year' => $insert_year,
-            'description' => $insert_description,
-            'imgpath' => $insert_imgpath,
-            'a_str' => $insert_author,
-            'g_str' => $insert_genre,
-            'owner' => $insert_owner,
-            'doctype' => 'ebook',
-            'bookfile' => $insert_filename
-        ))) {
-
-            $bookid = $id;
-        }
-
-        // insert the author into the authors table. Keeping authors in a separate table allows 
-        // to better filter by author.
-        $author_collection = $db->table('authors');
-
-        // if there are multiple authors, split them and insert each into the authors table
-        if (strpos($insert_author, ';') !== false) {
-            $authors = explode(";", $insert_author);
-            foreach ($authors as $author) {
-
-                $insert_author = trim($author);
-
-                if ($id = $author_collection->insert(array(
-                    'author' => $insert_author,
-                    'book_id' => $bookid
-                ))) {
-                }
+            function onScanFailure(error) {
+                  console.warn(`Code scan error: ${error}`);
             }
-        } else {
-            $insert_author = $_POST['author'];
-            if ($insert_author != '') {
-                if ($id = $author_collection->insert(array(
-                    'author' => $insert_author,
-                    'book_id' => $bookid
-                ))) {
-                }
-            }
-        }
 
+            let html5QrcodeScanner = new Html5QrcodeScanner("reader", {
+                  fps: 10,
+                  qrbox: 250
+            });
+            html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+      </script>
+</body>
 
-        // insert the genre into the genres table. Keeping genres in a separate table allows
-        // to better filter by genre.
-        $genre_collection = $db->table('genres');
-
-        // if there are multiple genres, split them and insert each into the genres table
-        if (strpos($insert_genre, ',') !== false) {
-            $genres = explode(",", $insert_genre);
-            foreach ($genres as $genre) {
-
-                $insert_genre = trim($genre);
-
-                if ($id = $genre_collection->insert(array(
-                    'genre' => $insert_genre,
-                    'book_id' => $bookid
-                ))) {
-                }
-            }
-        } else {
-            $insert_genre = $_POST['genre'];
-            if ($insert_genre != '') {
-                if ($id = $genre_collection->insert(array(
-                    'genre' => $insert_genre,
-                    'book_id' => $bookid
-                ))) {
-                }
-            }
-        }
-        echo '<p>' . $lang['ADDED_SUCCESS'] . '<a href="display?id=' . $bookid . '">' . $lang['ADDED_SUCCESS_REDIRECT'] . '</a>.</p>';
-    } else {
-    ?>
-
-        <form action="" method="post" enctype="multipart/form-data">
-            <label class="add-new-item"><i class="fa fa-user" aria-hidden="true"></i>
-                <?php echo $lang['ADD_AUTHOR_LABEL'] ?></label> <input
-                class="add-item-input" type="text" name="author" /><label
-                class="add-new-item"><i class="fa fa-font" aria-hidden="true"></i>
-                <?php echo $lang['ADD_TITLE_LABEL'] ?></label> <input
-                class="add-item-input" type="text" name="title" required /> <label
-                class="add-new-item"><i class="fa fa-barcode" aria-hidden="true"></i> <?php echo $lang['ADD_ISBN_LABEL'] ?></label>
-            <input class="add-item-input" type="text" name="isbn" /> <label
-                class="add-new-item"><i class="fa fa-building" aria-hidden="true"></i>
-                <?php echo $lang['ADD_PUBLISHER_LABEL'] ?></label> <input
-                class="add-item-input" type="text" name="publisher" /> <label
-                class="add-new-item"><i class="fa fa-calendar" aria-hidden="true"></i> <?php echo $lang['ADD_YEAR_LABEL'] ?></label>
-            <input class="add-item-input" type="text" name="year" /> <label
-                class="add-new-item"><i class="fa fa-tag" aria-hidden="true"></i> <?php echo $lang['ADD_GENRE_LABEL'] ?></label>
-            <input class="add-item-input" type="text" name="genre" /> <label
-                class="add-new-item"><i class="fa fa-file-image-o" aria-hidden="true"></i> <?php echo $lang['ADD_COVER_LABEL'] ?></label>
-            <input class="add-item-input" type="text" name="imgpath" /> <label
-                class="add-new-item"><i class="fa fa-align-left" aria-hidden="true"></i> <?php echo $lang['ADD_DESCRIPTION_LABEL'] ?></label>
-            <textarea class="add-item-input" type="text" name="description"></textarea>
-
-            <input class="add-item-submit" type="submit" name="submit"
-                value="<?php echo $lang['ADD_ADDBUTTON'] ?>" /> <input
-                class="add-item-submit cancel-this" type="button" name="cancel"
-                value="<?php echo $lang['ADD_CANCELBUTTON'] ?>"
-                onClick="window.location='index';" />
-        </form>
-
-    <?php } ?>
-
-    <div class="clear"></div>
-
-</div>
-
-<?php include_once('snippets/library_footer.php') ?>
+</html>

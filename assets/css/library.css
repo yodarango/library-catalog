@@ -69,6 +69,7 @@
   font-size: 12px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  padding: var(--dr-spacing-2) 0;
 }
 
 .library-menu_item:hover {
@@ -82,9 +83,13 @@
 
 .library-menu_item i {
   display: block;
-  font-size: 20px;
+  font-size: 2rem;
   color: var(--dr-epsilon);
-  margin-bottom: 5px;
+}
+
+.library-menu_item.active i,
+.library-menu_item.active span {
+  color: var(--dr-alpha);
 }
 
 .library-menu_item span {

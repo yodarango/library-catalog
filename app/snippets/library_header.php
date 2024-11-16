@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 
 include_once('logged-in.php');
@@ -66,7 +67,7 @@ if (logged_in() == false) {
 						<img src="assets/icons/favicon.png" alt="Library icon ">
 					</a>
 					<?php
-					$term = $_POST ? $_POST['term'] : "";
+					$term = isset($_POST["term"]) ? $_POST['term'] : "";
 					?>
 					<div class="global-search w-100">
 						<form action="library" id="searchform" method="post" class="d-flex align-items-center justify-content-start column-gap-2">
@@ -83,3 +84,4 @@ if (logged_in() == false) {
 			<section class="library-content-area bg-beta">
 				<div>
 				<?php } ?>
+				<?php ob_end_flush(); ?>
