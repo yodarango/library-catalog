@@ -89,9 +89,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <i class="fa fa-times"></i>
                   </button>
                   <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#library">Library</a></li>
-                        <li><a href="#coffeeshop">Coffeeshop</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/library">Library</a></li>
+                        <li><a href="coffeeshop">Coffeeshop</a></li>
                         <li><button id="open-modal-button" class="open-modal-button">Prayer request</button></li>
                   </ul>
             </nav>

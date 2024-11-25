@@ -1,87 +1,32 @@
 <?php
-include_once('config/config.php');
-include_once('toolkit/bootstrap.php');
-
-// Connessione al database
-$db = new Database(array(
-      'type' => 'mysql',
-      'host' => $hostname,
-      'database' => $database,
-      'user' => $username,
-      'password' => $password
-));
+include_once('snippets/coffeeshop_header.php');
 
 // Recupera i dati dalla tabella coffees
 $collection = $db->table('coffees');
 $coffees = $collection->select('*')->order('name ASC')->all();
 ?>
 
-<!DOCTYPE html>
-<html lang="it">
+<div class="coffee-card-container bg-beta">
+      <?php foreach ($coffees as $coffee): ?>
+            <div class="coffee-card p-4 shadow rounded d-flex align-items-center justify-content-start gap-4 mb-4">
+                  <?php if (!empty($coffee->thumbnail)): ?>
+                        <img class="rounded" src="<?= htmlspecialchars($coffee->thumbnail) ?>" alt="<?= htmlspecialchars($coffee->name) ?>">
+                  <?php else: ?>
+                        <img class="rounded" src="assets/images/cappuccino.webp" alt="Immagine predefinita">
+                  <?php endif; ?>
+                  <div>
+                        <h4 class="mb-2"><?= htmlspecialchars($coffee->name) ?></h4>
+                        <p class="mb-2 description"><?= htmlspecialchars($coffee->description) ?></p>
+                        <button class="p-2 color-alpha bg-lambda d-flex align-items-center justify-content-start gap-2">
+                              <i class="fa fa-dollar"></i>
+                              <spa><?= number_format($coffee->price, 2) ?></spa>
+                        </button>
 
-<head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>STWC | Coffee Shop</title>
-      <style>
-            .card {
-                  border: 1px solid #ddd;
-                  border-radius: 8px;
-                  padding: 16px;
-                  margin: 16px;
-                  max-width: 300px;
-                  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                  text-align: center;
-            }
-
-            .card img {
-                  width: 100%;
-                  height: auto;
-                  border-radius: 4px;
-                  margin-bottom: 12px;
-            }
-
-            .card h3 {
-                  margin-top: 0;
-                  font-size: 1.5em;
-            }
-
-            .card p {
-                  margin: 8px 0;
-            }
-
-            .price {
-                  font-weight: bold;
-                  color: #2c3e50;
-            }
-
-            .card-container {
-                  display: flex;
-                  flex-wrap: wrap;
-                  justify-content: space-around;
-            }
-      </style>
-</head>
-
-<body>
-
-      <h2>The Coffee Shop</h2>
-
-      <div class="card-container">
-            <?php foreach ($coffees as $coffee): ?>
-                  <div class="card">
-                        <?php if (!empty($coffee->thumbnail)): ?>
-                              <img src="<?= htmlspecialchars($coffee->thumbnail) ?>" alt="<?= htmlspecialchars($coffee->name) ?>">
-                        <?php else: ?>
-                              <img src="default-thumbnail.jpg" alt="Immagine predefinita">
-                        <?php endif; ?>
-                        <h3><?= htmlspecialchars($coffee->name) ?></h3>
-                        <p class="price">€<?= number_format($coffee->price, 2) ?></p>
-                        <p><?= htmlspecialchars($coffee->description) ?></p>
                   </div>
-            <?php endforeach; ?>
-      </div>
+            </div>
+      <?php endforeach; ?>
+</div>
 
-</body>
-
-</html>
+<?php
+include_once('snippets/coffeeshop_footer.php');
+?>

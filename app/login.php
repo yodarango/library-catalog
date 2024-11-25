@@ -13,12 +13,6 @@ if (logged_in() == true) {
 include_once('config/config.php');
 include_once("toolkit/bootstrap.php");
 
-if (isset($lang)) {
-    include_once('./languages/' . $lang . '.php');
-} else {
-    include_once('./languages/en-US.php');
-}
-
 if (isset($_POST['submit'])) {
     $appuser = $_POST['name'];
     $apppassword = $_POST['pass'];
@@ -36,7 +30,7 @@ if (isset($_POST['submit'])) {
         ->all();
 
     if ($query->count() != 1) {
-        echo $lang['LOGIN_ERROR'];
+        echo '<p>Error: Invalid username/password combination.</p>';
     } else {
         foreach ($query as $q) {
             $pw = $q->password();
@@ -58,41 +52,85 @@ if (isset($_POST['submit'])) {
 
                 redirect_to("index");
             } else {
-                echo $lang['LOGIN_ERROR'];
+                echo '<p>Error: Invalid username/password combination.</p>';
             }
         }
     }
 }
 
-include_once('app/snippets/library_header-setup.php');
 ?>
 
-<section id="setup">
+<!DOCTYPE html>
+<html lang="en">
 
-    <h1><?php echo $lang['LOGIN_WELCOME']; ?></h1>
-    <p><?php echo $lang['LOGIN_NOTICE']; ?></p>
+<head>
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.danielrangel.net/fullds.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>STWC | login</title>
 
-    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-        <label><?php echo $lang['LOGIN_USER']; ?></label> <input type="text"
-            name="name" required /> <label><?php echo $lang['LOGIN_PASSWORD']; ?></label>
-        <i class="fa fa-eye" onmouseover="mouseoverPass();"
-            onmouseout="mouseoutPass();" aria-hidden="true"></i> <input
-            type="password" id="password" name="pass" required /> <br /> <input
-            type="submit" class="loginbutton" name="submit"
-            value="<?php echo $lang['LOGIN_BUTTON']; ?>">
-    </form>
-
-    <script type="text/javascript">
-        function mouseoverPass(obj) {
-            var obj = document.getElementById('password');
-            obj.type = "text";
+    <style>
+        form {
+            max-width: 50rem;
         }
 
-        function mouseoutPass(obj) {
-            var obj = document.getElementById('password');
-            obj.type = "password";
+        form input {
+            border: .1rem soli var(--delta);
         }
-    </script>
+    </style>
+</head>
 
-</section>
-<?php include_once('app/snippets/library_footer-setup.php'); ?>
+<body>
+    <header class="p-3 bg-zeta w-100 mb-6">
+        <h1 class="text-center">Welcome</h1>
+        <p class="text-center"><?php echo  'Please login to start using the STWC services. ' ?></p>
+    </header>
+    <section id="setup">
+        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" class="d-bock m-auto">
+            <div class="mb-4">
+                <label class="d-block mb-2"><?php echo 'Username'; ?></label>
+                <input type="text"
+                    name="name" required class="p-2 border border-delta w-100" />
+
+            </div>
+            <script type="text/javascript">
+                function changeVisibility() {
+                    var x = document.getElementById("password");
+                    if (x.type === "password") {
+                        x.type = "text";
+                    } else {
+                        x.type = "password";
+                    }
+
+                    // change icon 
+                    var icon = document.querySelector('.fa-eye');
+                    if (icon.classList.contains('fa-eye')) {
+                        icon.classList.remove('fa-eye');
+                        icon.classList.add('fa-eye-slash');
+                    } else {
+                        icon.classList.remove('fa-eye-slash');
+                        icon.classList.add('fa-eye');
+                    }
+                }
+            </script>
+            <div class="mb-4">
+                <label class="d-block mb-2"><?php echo 'Password'; ?></label>
+                <div class="d-flex align-items-center justify-content-start column-gap-2">
+                    <input
+                        type="password" id="password" name="pass" required class="p-2 border border-delta w-100" />
+                    <button class="bg-nu p-0" onclick="changeVisibility();" type="button"><i class="fa fa-eye color-alpha"></i></button>
+                </div>
+            </div>
+            <div>
+
+                <button class="w-100 bg-delta w-100" type="submit" name="submit">Login</button>
+            </div>
+        </form>
+
+
+
+    </section>
+</body>
+
+</html>

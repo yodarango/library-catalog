@@ -55,7 +55,7 @@ if (isset($item)) {
 			<p class="book-description color-zeta"><i class="color-zeta fa-building fa me-2 d-inline-block"></i> <span><?php echo $item->publisher(); ?></span></p>
 			<p class="book-description color-zeta mb-2"><i class="color-zeta fa-tags fa me-2 d-inline-block"></i> <span><?php echo $item->genre(); ?></span></p>
 			<!-- if this is an admin they should be able to delete and edit  -->
-			<?php if (logged_in()) { ?>
+			<?php if (!logged_in()) { ?>
 				<form method="POST" action="/borrow">
 					<input type="hidden" name="id" value="<?php echo $bookid; ?>">
 					<input type="hidden" name="is_lent" value="<?php echo $item->islent() ? "0" : "1"; ?>">
@@ -64,6 +64,11 @@ if (isset($item)) {
 						<span><?php echo $borrow_button_label; ?></span>
 					</button>
 				</form>
+			<?php } else { ?>
+				<a class="borrow-book p-2 bg-zeta color-alpha rounded d-block w-100 d-flex align-items-center justify-content-center" href="/login">
+					<i class="fa fa-exchange me-2" aria-hidden="true"></i>
+					<span>Borrow</span>
+				</a>
 			<?php } ?>
 			<?php
 			include_once('app/snippets/logged-in.php');
