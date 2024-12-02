@@ -1,5 +1,4 @@
 <?php include_once('snippets/library_header.php') ?>
-<link rel="stylesheet" href="assets/css/book.css">
 
 <?php
 $collection = $db->table('books');

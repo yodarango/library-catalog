@@ -53,7 +53,7 @@ if (logged_in() == false) {
             <!-- TODO: sostituie questo con i miei iconi -->
             <link rel="stylesheet" href="assets/css/font-awesome.min.css">
             <link rel="stylesheet" href="assets/css/app.css">
-            <link rel="stylesheet" href="assets/css/coffeeshop.css">
+            <link rel="stylesheet" href="assets/css/admin.css">
             <title>Coffeeshop</title>
       </head>
 

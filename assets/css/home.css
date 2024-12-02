@@ -776,3 +776,14 @@ h6 {
     opacity: 0;
   }
 }
+
+.logout-in-button {
+  background-color: #12ffe4;
+  color: #000;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  display: block;
+  margin-top: 1.6rem;
+}

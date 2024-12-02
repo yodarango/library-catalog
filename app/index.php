@@ -1,6 +1,9 @@
 <?php
+session_start();
 include_once('config/config.php');
 include_once('toolkit/bootstrap.php');
+include_once('snippets/logged-in.php');
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $name = trim($_POST['name']);
@@ -64,6 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
       <link rel="stylesheet" href="assets/css/font-awesome.min.css">
       <link rel="stylesheet" href="/assets/css/home.css">
+
 </head>
 
 <body>
@@ -92,6 +96,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <li><a href="/">Home</a></li>
                         <li><a href="/library">Library</a></li>
                         <li><a href="coffeeshop">Coffeeshop</a></li>
+                        <?php if (is_admin()) { ?>
+                              <li><a href="/admin-library">Admin</a></li>
+                        <?php } ?>
+                        <?php if (logged_in()) { ?>
+                              <li><a href="/logout"><button class="logout-in-button">Logout</button></a></li>
+                        <?php } ?>
+                        <?php if (!logged_in()) { ?>
+                              <li><a href="/login"><button class="logout-in-button">Login</button></a></li>
+                        <?php } ?>
                         <li><button id="open-modal-button" class="open-modal-button">Prayer request</button></li>
                   </ul>
             </nav>

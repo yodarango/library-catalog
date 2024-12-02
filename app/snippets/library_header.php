@@ -15,11 +15,6 @@ if (logged_in() == false) {
 		unlink('./config/configure.php');
 		include_once('update-status.php');
 	}
-	if (isset($lang)) {
-		include_once('./languages/' . $lang . '.php');
-	} else {
-		include_once('./languages/en-US.php');
-	}
 
 	// initializing the database connection so all pages have access to it 
 	$db = new Database(array(
@@ -53,7 +48,6 @@ if (logged_in() == false) {
 		<link rel="stylesheet" type="text/css" href="https://cdn.danielrangel.net/fullds.min.css">
 		<!-- TODO: sostituie questo con i miei iconi -->
 		<link rel="stylesheet" href="assets/css/font-awesome.min.css">
-		<link rel="stylesheet" href="assets/css/library.css">
 		<link rel="stylesheet" href="assets/css/app.css">
 		<title>Library</title>
 	</head>

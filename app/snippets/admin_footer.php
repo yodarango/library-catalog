@@ -12,12 +12,12 @@ function get_active_class($page)
 
 
 ?>
-<section class="coffeeshop-menu">
-      <ul class="coffeeshop-menu-list">
-            <li class="coffeeshop-menu_item browse <?php get_active_class("admin") ?>"><a href="/admin"><i class="fa fa-home" aria-hidden="true"></i><span><?php echo $lang['MENU_BROWSE']; ?></span></a></li>
-            <li class="coffeeshop-menu_item browse <?php get_active_class("admin-library") ?>"><a href="/admin-library"><i class="fa fa-book" aria-hidden="true"></i><span><?php echo $lang['MENU_BROWSE']; ?></span></a></li>
-            <li class="coffeeshop-menu_item add <?php get_active_class("admin-coffeeshop") ?>"><a href="/admin-coffeeshop"><i class="fa fa-coffee" aria-hidden="true"></i><span><?php echo $lang['MENU_ADD']; ?></span></a></li>
-            <li class="coffeeshop-menu_item">
+<section class="bottom-menu">
+      <ul class="bottom-menu-list">
+            <li class="bottom-menu_item browse <?php get_active_class("admin") ?>"><a href="/admin"><i class="fa fa-home" aria-hidden="true"></i><span>Home</span></a></li>
+            <li class="bottom-menu_item browse <?php get_active_class("admin-library") ?>"><a href="/admin-library"><i class="fa fa-book" aria-hidden="true"></i><span>Library</span></a></li>
+            <li class="bottom-menu_item add <?php get_active_class("admin-coffeeshop") ?>"><a href="/admin-coffeeshop"><i class="fa fa-coffee" aria-hidden="true"></i><span>Cofeeshop</span></a></li>
+            <li class="bottom-menu_item">
                   <?php if (logged_in()) { ?>
                         <a href="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> <span><?php echo $lang['MENU_LOGOUT']; ?></span></a>
                   <?php } else { ?>

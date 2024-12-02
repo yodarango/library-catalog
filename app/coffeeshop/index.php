@@ -1,5 +1,5 @@
 <?php
-include_once('snippets/coffeeshop_header.php');
+include_once('app/snippets/coffeeshop_header.php');
 
 // Recupera i dati dalla tabella coffees
 $collection = $db->table('coffees');
@@ -28,5 +28,5 @@ $coffees = $collection->select('*')->order('name ASC')->all();
 </div>
 
 <?php
-include_once('snippets/coffeeshop_footer.php');
+include_once('app/snippets/coffeeshop_footer.php');
 ?>

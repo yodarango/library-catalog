@@ -12,18 +12,18 @@ function get_active_class($page)
 
 
 ?>
-<section class="library-menu">
-      <ul class="library-menu-list">
-            <li class="library-menu_item browse <?php get_active_class("index") ?>"><a href="/"><i class="fa fa-home" aria-hidden="true"></i><span><?php echo $lang['MENU_BROWSE']; ?></span></a></li>
-            <li class="library-menu_item browse <?php get_active_class("library") ?>"><a href="/library"><i class="fa fa-book" aria-hidden="true"></i><span><?php echo $lang['MENU_BROWSE']; ?></span></a></li>
+<section class="bottom-menu">
+      <ul class="bottom-menu-list">
+            <li class="bottom-menu_item browse <?php get_active_class("index") ?>"><a href="/admin"><i class="fa fa-home" aria-hidden="true"></i><span>Home</span></a></li>
+            <li class="bottom-menu_item browse <?php get_active_class("library") ?>"><a href="/admin-library"><i class="fa fa-book" aria-hidden="true"></i><span>Library</span></a></li>
             <?php if (is_admin()) { ?>
-                  <li class="library-menu_item add <?php get_active_class("add") ?>"><a href="/add"><i class="fa fa-plus" aria-hidden="true"></i><span><?php echo $lang['MENU_ADD']; ?></span></a></li>
+                  <li class="bottom-menu_item add <?php get_active_class("add") ?>"><a href="/admin-coffeeshop"><i class="fa fa-coffee" aria-hidden="true"></i><span>Coffeeshop</span></a></li>
             <?php } ?>
-            <li class="library-menu_item">
+            <li class="bottom-menu_item">
                   <?php if (logged_in()) { ?>
-                        <a href="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> <span><?php echo $lang['MENU_LOGOUT']; ?></span></a>
+                        <a href="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> <span>Logout</span></a>
                   <?php } else { ?>
-                        <a href="login"><i class="fa fa-sign-in" aria-hidden="true"></i> <span><?php echo $lang['MENU_LOGIN']; ?></span></a>
+                        <a href="login"><i class="fa fa-sign-in" aria-hidden="true"></i> <span>Login</span></a>
                   <?php } ?>
             </li>
       </ul>

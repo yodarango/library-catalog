@@ -1,2 +1,2 @@
 <?php
-require_once('app/coffeeshop.php');
+require_once('app/coffeeshop/index.php');

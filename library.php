@@ -1,2 +1,2 @@
 <?php
-require_once('app/library.php');
+require_once('app/library/index.php');
