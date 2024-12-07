@@ -15,9 +15,9 @@ function get_active_class($page)
 <section class="bottom-menu">
       <ul class="bottom-menu-list">
             <li class="bottom-menu_item browse <?php get_active_class("index") ?>"><a href="/"><i class="fa fa-home" aria-hidden="true"></i><span>Home</span></a></li>
-            <li class="bottom-menu_item browse <?php get_active_class("coffeeshop") ?>"><a href="/coffeeshop"><i class="fa fa-coffee" aria-hidden="true"></i><span>Shop</span></a></li>
+            <li class="bottom-menu_item browse <?php get_active_class("coffeeshop") ?>"><a href="/coffeeshop"><i class="fa fa-coffee" aria-hidden="true"></i><span>Coffee shop</span></a></li>
             <?php if (is_admin()) { ?>
-                  <li class="bottom-menu_item add <?php get_active_class("orders") ?>"><a href="/admin-coffeeshop"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>Orders</span></a></li>
+                  <li class="bottom-menu_item add <?php get_active_class("library") ?>"><a href="/library"><i class="fa fa-book" aria-hidden="true"></i><span>Library</span></a></li>
             <?php } ?>
             <li class="bottom-menu_item">
                   <?php if (logged_in()) { ?>

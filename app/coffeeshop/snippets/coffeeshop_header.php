@@ -2,7 +2,7 @@
 ob_start();
 session_start();
 
-include_once('logged-in.php');
+include_once('app/snippets/logged-in.php');
 if (logged_in() == false) {
       redirect_to("login.php");
 } else {
@@ -54,7 +54,7 @@ if (logged_in() == false) {
       <body>
             <main class="main" role="main">
                   <!-- header -->
-                  <header class="coffeeshop-header d-flex align-items-center justify-content-start bg-zeta">
+                  <header class="app-header d-flex align-items-center justify-content-start bg-zeta">
                         <div class="d-flex align-items-center justify-content-between w-100">
                               <a class="coffeeshop-logo flex-shrink-0" href="index">
                                     <img src="assets/icons/favicon.png" alt="coffeeshop icon ">
@@ -62,7 +62,7 @@ if (logged_in() == false) {
                               <h2 class="text-center">Coffee Shop</h2>
                         </div>
                   </header>
-                  <section class="coffeeshop-content-area bg-beta">
+                  <section class="main-content-area bg-beta">
                         <div>
                         <?php } ?>
                         <?php ob_end_flush(); ?>

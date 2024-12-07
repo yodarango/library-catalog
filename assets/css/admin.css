@@ -1,42 +1,51 @@
+/* globals */
+.add-item-input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--dr-epsilon);
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
 /* header */
-.coffeeshop-header {
+.admin-header {
   width: 100vw;
   height: 12rem;
 }
 
-.coffeeshop-header > div {
+.admin-header > div {
   max-width: 80rem;
   margin-left: 4%;
   width: 92%;
 }
 
-.coffeeshop-content-area {
+.main-content-area {
   border-top-left-radius: 2rem;
   border-top-right-radius: 2rem;
   margin-top: -2rem;
 }
 
-.coffeeshop-content-area > div {
+.main-content-area > div {
   margin: auto;
   width: 92%;
   max-width: 80rem;
-  padding-top: 4.8rem;
+  padding: var(--dr-spacing-4) 0 5.8rem;
 }
 
-.coffeeshop-header > div {
+.admin-header > div {
   max-width: 60rem;
   margin-bottom: 2rem;
 }
 
-.coffeeshop-header .search-button .fa {
+.admin-header .search-button .fa {
   font-size: 3rem;
 }
 
-.coffeeshop-header input::placeholder {
+.admin-header input::placeholder {
   opacity: 0.5;
 }
-.coffeeshop-header input:focus,
-.coffeeshop-header input:active {
+.admin-header input:focus,
+.admin-header input:active {
   border: none;
   outline: none;
   box-shadow: none;
@@ -114,4 +123,14 @@
   object-fit: cover;
   border-radius: 1rem;
   max-width: 15rem;
+}
+
+/* library  */
+.book-card-admin-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1rem;
+  max-width: 15rem;
+  max-height: 15rem;
 }

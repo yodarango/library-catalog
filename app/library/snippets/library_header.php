@@ -2,7 +2,7 @@
 ob_start();
 session_start();
 
-include_once('logged-in.php');
+include_once('app/snippets/logged-in.php');
 if (logged_in() == false) {
 	redirect_to("login.php");
 } else {
@@ -49,13 +49,14 @@ if (logged_in() == false) {
 		<!-- TODO: sostituie questo con i miei iconi -->
 		<link rel="stylesheet" href="assets/css/font-awesome.min.css">
 		<link rel="stylesheet" href="assets/css/app.css">
+		<link rel="stylesheet" href="assets/css/library.css">
 		<title>Library</title>
 	</head>
 
 	<body>
 		<main class="main" role="main">
 			<!-- header -->
-			<header class="library-header d-flex align-items-center justify-content-start bg-zeta">
+			<header class="app-header d-flex align-items-center justify-content-start bg-zeta">
 				<div class="d-flex align-items-center justify-content-between w-100">
 					<a class="library-logo flex-shrink-0" href="index">
 						<img src="assets/icons/favicon.png" alt="Library icon ">
@@ -75,7 +76,7 @@ if (logged_in() == false) {
 					</div>
 				</div>
 			</header>
-			<section class="library-content-area bg-beta">
+			<section class="main-content-area bg-beta">
 				<div>
 				<?php } ?>
 				<?php ob_end_flush(); ?>

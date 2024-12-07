@@ -1,8 +1,13 @@
+/* globals  */
 a {
   text-decoration: none;
 }
 
-/* book styles  */
+input {
+  background-color: var(--dr-gamma);
+}
+
+/* single book page styles  */
 .book-detail-container {
   display: flex;
   flex-wrap: wrap;
@@ -50,44 +55,44 @@ a {
 
 /*  coffee shop styles  */
 /* header */
-.coffeeshop-header {
+.app-header {
   width: 100vw;
   height: 12rem;
 }
 
-.coffeeshop-header > div {
+.app-header > div {
   max-width: 80rem;
   margin-left: 4%;
   width: 92%;
 }
 
-.coffeeshop-content-area {
+.main-content-area {
   border-top-left-radius: 2rem;
   border-top-right-radius: 2rem;
   margin-top: -2rem;
 }
 
-.coffeeshop-content-area > div {
+.main-content-area > div {
   margin: auto;
   width: 92%;
   max-width: 80rem;
   padding-top: 4.8rem;
 }
 
-.coffeeshop-header > div {
+.app-header > div {
   max-width: 60rem;
   margin-bottom: 2rem;
 }
 
-.coffeeshop-header .search-button .fa {
+.app-header .search-button .fa {
   font-size: 3rem;
 }
 
-.coffeeshop-header input::placeholder {
+.app-header input::placeholder {
   opacity: 0.5;
 }
-.coffeeshop-header input:focus,
-.coffeeshop-header input:active {
+.app-header input:focus,
+.app-header input:active {
   border: none;
   outline: none;
   box-shadow: none;

@@ -2,9 +2,9 @@
 ob_start();
 session_start();
 
-include_once('logged-in.php');
+include_once('app/snippets/logged-in.php');
 if (logged_in() == false) {
-      redirect_to("login.php");
+      redirect_to("login");
 } else {
       $path = $_SERVER['REQUEST_URI'];
       // including Kirby Toolkit
@@ -52,7 +52,6 @@ if (logged_in() == false) {
             <link rel="stylesheet" type="text/css" href="https://cdn.danielrangel.net/fullds.min.css">
             <!-- TODO: sostituie questo con i miei iconi -->
             <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-            <link rel="stylesheet" href="assets/css/app.css">
             <link rel="stylesheet" href="assets/css/admin.css">
             <title>Coffeeshop</title>
       </head>
@@ -60,15 +59,27 @@ if (logged_in() == false) {
       <body>
             <main class="main" role="main">
                   <!-- header -->
-                  <header class="coffeeshop-header d-flex align-items-center justify-content-start bg-zeta">
+                  <header class="admin-header d-flex align-items-center justify-content-start bg-zeta">
                         <div class="d-flex align-items-center justify-content-between w-100">
-                              <a class="coffeeshop-logo flex-shrink-0" href="index">
-                                    <img src="assets/icons/favicon.png" alt="coffeeshop icon ">
+                              <a class="library-logo flex-shrink-0" href="index">
+                                    <img src="assets/icons/favicon.png" alt="Library icon ">
                               </a>
-                              <h2 class="text-center">Coffee Shop</h2>
+                              <?php
+                              $term = isset($_POST["term"]) ? $_POST['term'] : "";
+                              ?>
+                              <div class="global-search w-100">
+                                    <form action="/admin-library" id="searchform" method="post" class="d-flex align-items-center justify-content-start column-gap-2">
+                                          <input class="search-form p-2 rounded w-100 d-block" type="text" name="term"
+                                                placeholder="Search for a book" value="<?php echo $term ?>" />
+                                          <button class="search-button bg-nu p-0" type="submit"
+                                                value="Search collection">
+                                                <i class="fa fa-search" aria-hidden="true"></i>
+                                          </button>
+                                    </form>
+                              </div>
                         </div>
                   </header>
-                  <section class="coffeeshop-content-area bg-beta">
+                  <section class="main-content-area bg-beta">
                         <div>
                         <?php } ?>
                         <?php ob_end_flush(); ?>

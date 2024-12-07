@@ -74,7 +74,7 @@ if (isset($item)) {
 			if (is_admin() == true) { ?>
 				<div class="book-actions mt-2 d-flex align-items-center justify-content-center gap-2">
 					<a class="item-action delete p-2 bg-danger color-alpha rounded d-block w-100 flex-shrink-1" href="delete?<?php echo $bookid; ?>"><i class="fa fa-trash me-2" aria-hidden="true"></i><span>Delete</span></a>
-					<a class="item-action edit p-2 bg-info color-beta rounded d-block w-100 flex-shrink-1" href="edit?<?php echo $bookid ?>"><i class="fa fa-pencil-square-o me-2" aria-hidden="true"></i><span>Edit</span></a>
+					<a class="item-action edit p-2 bg-info color-beta rounded d-block w-100 flex-shrink-1" href="admin-library-book-edit?id=<?php echo $bookid ?>"><i class="fa fa-pencil-square-o me-2" aria-hidden="true"></i><span>Edit</span></a>
 				</div>
 
 			<?php } ?>
@@ -86,4 +86,4 @@ if (isset($item)) {
 <?php
 }
 ?>
-<?php include_once('snippets/library_footer.php') ?>
+<?php include_once('app/snippets/app_footer.php') ?>

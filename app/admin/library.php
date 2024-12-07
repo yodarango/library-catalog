@@ -1,192 +1,71 @@
-<?php include_once('app/snippets/admin_header.php') ?>
+<?php
+include_once('snippets/admin_header.php');
 
-<section class="admin-content-area">
-    <h2 class="mb-4">
-        <i class="fa fa-plus" aria-hidden="true"></i>
-        <span>Add</span>
-    </h2>
-    <div id="item-list">
+$term = $_POST ? $_POST['term'] : "";
 
-        <?php
+$collection = $db->table('books');
 
-        require_once('app/lib/class.file.php');
-        require_once('app/lib/class.upload.php');
-
-        if (isset($_POST['submit'])) { // check if form was submitted
-
-            if (isset($_FILES['files'])) {
-                $validations = array(
-                    'category' => array('ebook'), // validate only those files within this list
-                    'size' => 20 // maximum of 20mb
-                );
-
-                // create new instance
-                $upload = new Upload($_FILES['files'], $validations);
-
-                // for each file
-                foreach ($upload->files as $file) {
-                    if ($file->validate()) {
-                        // do your thing on this file ...
-                        // ...
-                        // say we don't allow audio files
-                        if ($file->is('audio')) $error = 'Audio not allowed';
-                        else {
-                            // then get base64 encoded string to do something else ...
-                            $filedata = $file->get_base64();
-
-                            // or get the GPS info ...
-                            $gps = $file->get_exif_gps();
-
-                            // then we move it to 'path/to/my/uploads'
-                            $result = $file->put('./ebooks');
-                            $error = $result ? '' : 'Error moving file';
-                        }
-                    } else {
-                        // oopps!
-                        $error = $file->get_error();
-                    }
-                    $filename = $file->name;
-                }
-            }
+$books = [];
 
 
-            // =========================== UPLOAD
+// filter the books if it is a post request
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+      $books = $db->table('books')
+            ->where('title', 'like', '%' . $term . '%')
+            ->orWhere('description', 'like', '%' . $term . '%')
+            ->orWhere('publisher', 'like', '%' . $term . '%')
+            ->orWhere('isbn', 'like', '%' . $term . '%')
+            ->orWhere('year', 'like', '%' . $term . '%')
+            ->orWhere('a_str', 'like', '%' . $term . '%')
+            ->orWhere('g_str', 'like', '%' . $term . '%')
+            ->orWhere('location', 'like', '%' . $term . '%')
+            ->orWhere('lentto', 'like', '%' . $term . '%')
+            ->orWhere('lentat', 'like', '%' . $term . '%')
+            ->all();
+} else {
+      // or fetch if not filtering
+      $books = $collection
+            ->select(['id', 'title', 'year', 'author', 'imgpath'])
+            ->order('title', 'ASC')
+            ->all();
+}
 
-            $collection = $db->table('books');
+?>
 
-            $insert_author = mb_convert_encoding($_POST['author'], 'UTF-8', 'auto');
-            $insert_title = $_POST['title'];
-            $insert_isbn = $_POST['isbn'];
-            $insert_publisher = $_POST['publisher'];
-            $insert_year = $_POST['year'];
-            $insert_description = $_POST['description'];
-            $insert_genre = $_POST['genre'];
-            $insert_imgpath = $_POST['imgpath'];
-            $insert_owner = $_SESSION['user_id'];
-            if (isset($filename)) {
-                $insert_filename = $filename;
-            } else {
-                $insert_filename = NULL;
-            }
+<div class="d-flex align-items-center justify-content-end">
+      <a href="/admin-library-book-add" class="btn btn-primary flex-shrink-0">
+            <i class="fa fa-plus color-lambda" aria-hidden="true"></i>
+            <span class=" color-lambda">Add new book</span>
+      </a>
+</div>
+<h3 class="my-4">Browse all <?php echo $books->count() ?> books</h3>
+<div class="item-list">
 
-            // insert the book into the db
-            if ($id = $collection->insert(array(
-                'title' => $insert_title,
-                'isbn' => $insert_isbn,
-                'publisher' => $insert_publisher,
-                'year' => $insert_year,
-                'description' => $insert_description,
-                'imgpath' => $insert_imgpath,
-                'a_str' => $insert_author,
-                'g_str' => $insert_genre,
-                'owner' => $insert_owner,
-                'doctype' => 'ebook',
-                'bookfile' => $insert_filename
-            ))) {
+      <?php foreach ($books as $book): ?>
+            <div class="book-card-admin d-flex align-items-start justify-content-start column-gap-2 bg-gamma p-4 rounded mb-4">
+                  <a href="/admin-library-book?id=<?php echo $book->id() ?>" class="d-flex align-items-start justify-content-start  w-100">
+                        <div class="book-card-admin-image">
+                              <img src="<?php echo $book->imgpath() ? $book->imgpath() : 'assets/icons/book-thumbnail.png' ?>" alt="<?php echo $book->title() ?>">
+                        </div>
+                        <div class="book-card-admin-info p-2">
+                              <h5 class="color-alpha mb-1">
+                                    <?php echo $book->title(); ?>
+                              </h5>
+                              <p class="color-alpha p-0 color-zeta fs-6">
+                                    <?php echo $book->author(); ?>
+                              </p>
+                              <p class="p-0 fs-6 color-alpha">
+                                    <?php echo strlen($book->description()) > 100 ? substr($book->description(), 0, 100) . '...' : $book->description(); ?>
+                              </p>
+                        </div>
+                  </a>
+                  <a class="d-block" href="delete?<?php echo $bookid; ?>">
+                        <button class="bg-danger p-4 color-alpha">
+                              <i class="fa fa-trash" aria-hidden="true"></i>
+                        </button>
+                  </a>
+            </div>
 
-                $bookid = $id;
-            }
-
-            // insert the author into the authors table. Keeping authors in a separate table allows 
-            // to better filter by author.
-            $author_collection = $db->table('authors');
-
-            // if there are multiple authors, split them and insert each into the authors table
-            if (strpos($insert_author, ';') !== false) {
-                $authors = explode(";", $insert_author);
-                foreach ($authors as $author) {
-
-                    $insert_author = trim($author);
-
-                    if ($id = $author_collection->insert(array(
-                        'author' => $insert_author,
-                        'book_id' => $bookid
-                    ))) {
-                    }
-                }
-            } else {
-                $insert_author = $_POST['author'];
-                if ($insert_author != '') {
-                    if ($id = $author_collection->insert(array(
-                        'author' => $insert_author,
-                        'book_id' => $bookid
-                    ))) {
-                    }
-                }
-            }
-
-
-            // insert the genre into the genres table. Keeping genres in a separate table allows
-            // to better filter by genre.
-            $genre_collection = $db->table('genres');
-
-            // if there are multiple genres, split them and insert each into the genres table
-            if (strpos($insert_genre, ',') !== false) {
-                $genres = explode(",", $insert_genre);
-                foreach ($genres as $genre) {
-
-                    $insert_genre = trim($genre);
-
-                    if ($id = $genre_collection->insert(array(
-                        'genre' => $insert_genre,
-                        'book_id' => $bookid
-                    ))) {
-                    }
-                }
-            } else {
-                $insert_genre = $_POST['genre'];
-                if ($insert_genre != '') {
-                    if ($id = $genre_collection->insert(array(
-                        'genre' => $insert_genre,
-                        'book_id' => $bookid
-                    ))) {
-                    }
-                }
-            }
-            echo '<p>' . 'Item successfully added to the collection.' . '<a href="display?id=' . $bookid . '">' . 'You can now view the item' . '</a>.</p>';
-        } else {
-        ?>
-
-            <form action="" method="post" enctype="multipart/form-data">
-                <label class="add-new-item"><i class="fa fa-user" aria-hidden="true"></i>
-                    Add author
-                </label>
-                <input
-                    class="d-block w-100 p-2 rounded add-item-input" type="text" name="author" />
-                <label
-                    class="add-new-item"><i class="fa fa-font" aria-hidden="true"></i>
-                    Add title
-                </label>
-                <input
-                    class="d-block w-100 p-2 rounded add-item-input" type="text" name="title" required /> <label
-                    class="add-new-item"><i class="fa fa-barcode" aria-hidden="true"></i>
-                    <span>Add SBN</span>
-                </label>
-                <input class="d-block w-100 p-2 rounded add-item-input" type="text" name="isbn" /> <label
-                    class="add-new-item"><i class="fa fa-building" aria-hidden="true"></i>
-                    Add publisher</label> <input
-                    class="d-block w-100 p-2 rounded add-item-input" type="text" name="publisher" /> <label
-                    class="add-new-item"><i class="fa fa-calendar" aria-hidden="true"></i> <span>Add year</span></label>
-                <input class="d-block w-100 p-2 rounded add-item-input" type="text" name="year" /> <label
-                    class="add-new-item"><i class="fa fa-tag" aria-hidden="true"></i> <span>Add genre</span></label>
-                <input class="d-block w-100 p-2 rounded add-item-input" type="text" name="genre" /> <label
-                    class="add-new-item"><i class="fa fa-file-image-o" aria-hidden="true"></i> <span>Add cover</span></label>
-                <input class="d-block w-100 p-2 rounded add-item-input" type="text" name="imgpath" /> <label
-                    class="add-new-item"><i class="fa fa-align-left" aria-hidden="true"></i> <span>Add description</span></label>
-                <textarea class="d-block w-100 p-2 rounded add-item-input" type="text" name="description"></textarea>
-
-                <input class="add-item-submit" type="submit" name="submit"
-                    value="Add" /> <input
-                    class="add-item-submit cancel-this" type="button" name="cancel"
-                    value="Cancel"
-                    onClick="window.location='index';" />
-            </form>
-
-        <?php } ?>
-
-        <div class="clear"></div>
-
-    </div>
-</section>
-
-<?php include_once('app/snippets/library_footer.php') ?>
+      <?php endforeach; ?>
+</div>
+<?php include_once('snippets/admin_footer.php') ?>

@@ -1,14 +1,11 @@
-<?php include_once('snippets/library_header.php'); ?>
+<?php include_once('snippets/admin_header.php'); ?>
 <h2>
-    <i class="fa fa-pencil-square-o" aria-hidden="true"></i><?php echo $lang['EDIT_TITLE']; ?>
+    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit item
 </h2>
 
 <div id="item-list">
 
     <?php
-
-    require_once('lib/class.file.php');
-    require_once('lib/class.upload.php');
 
     $collection = $db->table('books');
 
@@ -221,7 +218,7 @@
                 }
             }
 
-            echo '<p>' . $lang['MODIFIED_SUCCESS'] . '<a href="display?id=' . $_POST['id'] . '">' . $lang['MODIFIED_SUCCESS_REDIRECT'] . '</a>.</p>';
+            echo '<p>' . 'Item successfully modified. ' . '<a href="display?id=' . $_POST['id'] . '">' . 'Go back to the item' . '</a>.</p>';
         } else {
     ?>
 
@@ -229,7 +226,7 @@
 
                 <input type="hidden" name="id" value="<?php echo $item->id() ?>" /> <label
                     class="add-new-item"><i class="fa fa-user" aria-hidden="true"></i>
-                    <?php echo $lang['ADD_AUTHOR_LABEL'] ?></label>
+                    echo 'Author<span>(s) &ndash; separated by semicolon (;)</span>' </label>
                 <?php $authors = $db->table('authors')->select('author')->where('book_id', '=', $bookid)->all(); ?>
                 <input class="add-item-input" type="text" name="author"
                     value="<?php $y = $authors->count();
@@ -242,21 +239,21 @@
                                 }
                             } ?>" />
                 <label class="add-new-item"><i class="fa fa-font" aria-hidden="true"></i>
-                    <?php echo $lang['ADD_TITLE_LABEL'] ?></label> <input
+                    Add title</label> <input
                     class="add-item-input" type="text" name="title"
                     value="<?php echo $item->title() ?>" required /> <label
                     class="add-new-item"><i class="fa fa-barcode" aria-hidden="true"></i>
-                    <?php echo $lang['ADD_ISBN_LABEL'] ?></label> <input
+                    Add SBN label</label> <input
                     class="add-item-input" type="text" name="isbn"
                     value="<?php echo $item->isbn() ?>" /> <label class="add-new-item"><i
-                        class="fa fa-building" aria-hidden="true"></i> <?php echo $lang['ADD_PUBLISHER_LABEL'] ?></label>
+                        class="fa fa-building" aria-hidden="true"></i> Add publisher label</label>
                 <input class="add-item-input" type="text" name="publisher"
                     value="<?php echo $item->publisher() ?>" /> <label
                     class="add-new-item"><i class="fa fa-calendar" aria-hidden="true"></i>
-                    <?php echo $lang['ADD_YEAR_LABEL'] ?></label> <input
+                    Add year label </label> <input
                     class="add-item-input" type="text" name="year"
                     value="<?php echo $item->year() ?>" /> <label class="add-new-item"><i
-                        class="fa fa-tag" aria-hidden="true"></i><?php echo $lang['ADD_GENRE_LABEL'] ?></label>
+                        class="fa fa-tag" aria-hidden="true"></i>Genre label</label>
                 <?php $genres = $db->table('genres')->select('genre')->where('book_id', '=', $bookid)->all(); ?>
                 <input class="add-item-input" type="text" name="genre"
                     value="<?php $z = $genres->count();
@@ -269,17 +266,17 @@
                                 }
                             } ?>" />
                 <label class="add-new-item"><i class="fa fa-file-image-o"
-                        aria-hidden="true"></i> <?php echo $lang['ADD_COVER_LABEL'] ?></label>
+                        aria-hidden="true"></i> Cover label</label>
                 <input class="add-item-input" type="text" name="imgpath"
                     value="<?php echo $item->imgpath() ?>" /> <label class="add-new-item"><i
-                        class="fa fa-align-left" aria-hidden="true"></i> <?php echo $lang['ADD_DESCRIPTION_LABEL'] ?></label>
+                        class="fa fa-align-left" aria-hidden="true"></i> Description label</label>
                 <textarea class="add-item-input" type="text" name="description"><?php echo $item->description() ?></textarea>
                 <label class="add-new-item"><i class="fa fa-compass"
-                        aria-hidden="true"></i><?php echo $lang['ADD_LOCATION_LABEL'] ?></label>
+                        aria-hidden="true"></i><?php echo 'Location label' ?></label>
                 <input class="add-item-input" type="text" name="location"
                     value="<?php echo $item->location() ?>" />
 
-                <div class="book-ebook">
+                <!-- <div class="book-ebook">
                     <input type="checkbox" name="isebook" id="ifebook"
                         class="showHideCheck_ebook" <?php if ($item->doctype() == 'ebook') {
                                                         echo 'checked';
@@ -303,7 +300,7 @@
                                 aria-hidden="true"></i> <?php echo $lang['EDIT_EBOOK_ADDNEWFILE'] ?></label>
                         <input class="upload" type="file" name="files[]" />
                     </div>
-                </div>
+                </div> -->
 
                 <div class="book-lent">
                     <input type="checkbox" name="islent" id="iflent"
@@ -311,23 +308,23 @@
                         <?php if ($item->islent() == 'on') {
                             echo 'checked';
                         } ?> /><label
-                        for="iflent"></label> <label class="add-new-item"><?php echo $lang['ADD_IFLENT_LABEL'] ?></label>
+                        for="iflent"></label> <label class="add-new-item"><?php echo 'This book is lent' ?></label>
 
                     <div class="showLending">
                         <label class="add-new-item"><i class="fa fa-user-circle-o"
-                                aria-hidden="true"></i> <?php echo $lang['ADD_LENTTO_LABEL'] ?></label>
+                                aria-hidden="true"></i> <?php echo 'Lent to' ?></label>
                         <input type="text" class="add-item-input" name="lentto"
                             value="<?php echo $item->lentto() ?>"> <label class="add-new-item"><i
-                                class="fa fa-calendar-check-o" aria-hidden="true"></i> <?php echo $lang['ADD_LENTAT_LABEL'] ?></label>
+                                class="fa fa-calendar-check-o" aria-hidden="true"></i> <?php echo 'Lent at' ?></label>
                         <input type="text" class="add-item-input" name="lentat"
                             value="<?php echo $item->lentat() ?>">
                     </div>
                 </div>
 
                 <input class="add-item-submit" type="submit"
-                    value="<?php echo $lang['EDIT_SAVEBUTTON'] ?>" name="submit" /> <input
+                    value="Save" name="submit" /> <input
                     class="add-item-submit cancel-this" type="button" name="cancel"
-                    value="<?php echo $lang['ADD_CANCELBUTTON'] ?>"
+                    value="Cancel"
                     onClick="window.location='display?<?php echo $id; ?>';" />
 
             </form>
@@ -338,4 +335,4 @@
     <div class="clear"></div>
 
 </div>
-<?php include_once('snippets/library_footer.php') ?>
+<?php include_once('snippets/admin_footer.php') ?>

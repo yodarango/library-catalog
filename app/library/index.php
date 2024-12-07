@@ -1,5 +1,5 @@
 <?php
-include_once('app/snippets/library_header.php');
+include_once('snippets/library_header.php');
 
 $term = $_POST ? $_POST['term'] : "";
 
@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <?php foreach ($books as $book): ?>
         <!-- <?php var_dump($book); ?> -->
-        <a href="book?id=<?php echo $book->id() ?>">
+        <a href="library-book?id=<?php echo $book->id() ?>">
             <div class="book-card">
                 <div class="book-card-image">
                     <img src="<?php echo $book->imgpath() ?>" alt="<?php echo $book->title() ?>">
@@ -54,4 +54,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </a>
     <?php endforeach; ?>
 </div>
-<?php include_once('app/snippets/library_footer.php') ?>
+<?php include_once('app/snippets/app_footer.php') ?>
