@@ -1,15 +1,16 @@
 <?php
 include_once('snippets/admin_header.php');
 
-$term = $_POST ? $_POST['term'] : "";
+// get the search term from the post request
+$term = isset($_POST['term']) ? $_POST['term'] : "";
+$bookId = $_POST ? $_POST['delete-id'] : null;
 
 $collection = $db->table('books');
 
 $books = [];
 
-
 // filter the books if it is a post request
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST" && is_null($bookId)) {
       $books = $db->table('books')
             ->where('title', 'like', '%' . $term . '%')
             ->orWhere('description', 'like', '%' . $term . '%')
@@ -30,6 +31,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             ->all();
 }
 
+//  delete a book from id 
+if (!is_null($bookId) && $_SERVER["REQUEST_METHOD"] === "POST") {
+
+      $item = $collection->find($bookId);
+
+      if (isset($item)) { // check if form was submitted
+
+            $collection = $db->table('books');
+            $author_collection = $db->table('authors');
+            $genre_collection = $db->table('genres');
+
+            if (($collection->where('id', '=', $bookId)->delete()) && ($author_collection->where('book_id', '=', $bookId)->delete()) && ($genre_collection->where('book_id', '=', $bookId)->delete())) {
+            }
+
+            // echo '<div class="bg-success color-beta p-2 rounded d-flex align-items-center justify-content-between"><p class="w-100"> Item successfully deleted from your collection. </p> <a class="bg-beta color-success p-4 rounded d-block flex-shrink-0" href="/admin/library">Reload</a>.</div>';
+            // reload the page
+            header("Location: /admin-library");
+      }
+}
 ?>
 
 <div class="d-flex align-items-center justify-content-end">
@@ -59,13 +79,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                               </p>
                         </div>
                   </a>
-                  <a class="d-block" href="delete?<?php echo $bookid; ?>">
-                        <button class="bg-danger p-4 color-alpha">
+
+                  <form action="/admin-library" id="delete-id" method="post" class="d-flex align-items-center justify-content-start column-gap-2">
+                        <input class="search-form p-2 rounded w-100 d-block" name="delete-id"
+                              value="<?php echo $book->id(); ?>" type="hidden" />
+                        <button class="d-block bg-danger p-4 color-alpha" type="submit"
+                              value="Delete item">
                               <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>
-                  </a>
+                  </form>
             </div>
 
       <?php endforeach; ?>
 </div>
+
 <?php include_once('snippets/admin_footer.php') ?>

@@ -93,7 +93,7 @@
                 $author_collection = $db->table('authors');
 
                 // if there are multiple authors, split them and insert each into the authors table
-                if (strpos($insert_author, ';') !== false) {
+                if (strpos($insert_author, ';') !== false && isset($bookid)) {
                     $authors = explode(";", $insert_author);
                     foreach ($authors as $author) {
 
@@ -105,7 +105,7 @@
                         ))) {
                         }
                     }
-                } else {
+                } else if (isset($bookid)) {
                     $insert_author = $_POST['author'];
                     if ($insert_author != '') {
                         if ($id = $author_collection->insert(array(
@@ -122,7 +122,7 @@
                 $genre_collection = $db->table('genres');
 
                 // if there are multiple genres, split them and insert each into the genres table
-                if (strpos($insert_genre, ',') !== false) {
+                if (strpos($insert_genre, ',') !== false && isset($bookid)) {
                     $genres = explode(",", $insert_genre);
                     foreach ($genres as $genre) {
 
@@ -134,7 +134,7 @@
                         ))) {
                         }
                     }
-                } else {
+                } else if (isset($bookid)) {
                     $insert_genre = $_POST['genre'];
                     if ($insert_genre != '') {
                         if ($id = $genre_collection->insert(array(
@@ -144,7 +144,18 @@
                         }
                     }
                 }
-                echo '<div class="bg-success color-beta p-2 rounded d-flex align-items-center justify-content-between"><p class="w-100"> Item successfully added to the collection. </p> <a class="bg-beta color-success p-4 rounded d-block flex-shrink-0" href="display?id=' . $bookid . '">' . 'You can now view the item' . '</a>.</div>';
+
+                if (isset($bookid)) {
+                    echo '<div class="bg-success color-beta p-2 rounded d-flex align-items-center justify-content-between">
+            <p class="w-100"> Item successfully added to the collection. </p>
+            <a class="bg-beta color-success p-4 rounded d-block flex-shrink-0" href="/admin-library">You can now view the item</a>
+          </div>';
+                } else {
+                    echo '<div class="bg-danger color-alpha p-2 rounded d-flex align-items-center justify-content-between">
+            <p class="w-100"> There was an error adding that item to the collection, sorry! </p>
+                        <a class="bg-beta color-danger p-4 rounded d-block flex-shrink-0" href="/admin-library-book-add">You can now view the item</a>
+          </div>';
+                }
             } else {
             ?>
 

@@ -12,6 +12,7 @@ function get_active_class($page)
 
 
 ?>
+
 <section class="bottom-menu">
       <ul class="bottom-menu-list">
             <li class="bottom-menu_item browse <?php get_active_class("index") ?>"><a href="/admin"><i class="fa fa-home" aria-hidden="true"></i><span>Home</span></a></li>
@@ -28,6 +29,7 @@ function get_active_class($page)
             </li>
       </ul>
 </section>
+<?php ob_end_flush(); ?>
 <footer class="footer">
 </footer>
 </body>

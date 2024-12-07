@@ -1,7 +1,7 @@
-<?php include_once('snippets/library_header.php') ?>
+<?php include_once('snippets/admin_header.php') ?>
 
 <h2>
-    <i class="fa fa-trash" aria-hidden="true"></i><?php echo $lang['DELETE_TITLE']; ?>
+    <i class="fa fa-trash" aria-hidden="true"></i>
 </h2>
 
 <div id="item-list">
@@ -25,10 +25,10 @@
             if (($collection->where('id', '=', $bookid)->delete()) && ($author_collection->where('book_id', '=', $bookid)->delete()) && ($genre_collection->where('book_id', '=', $bookid)->delete())) {
             }
 
-            echo '<p>' . $lang['DELETE_SUCCESS'] . '<a href="index">' . $lang['DELETE_REDIRECT'] . '</a>.</p>';
+            echo '<div class="bg-success color-beta p-2 rounded d-flex align-items-center justify-content-between"><p class="w-100"> Item successfully deleted from your collection. </p> <a class="bg-beta color-success p-4 rounded d-block flex-shrink-0" href="/admin/library' . 'Back to my library' . '</a>.</div>';
         } else {
     ?>
-            <p><?php echo $lang['DELETE_WARNING']; ?></p>
+            <p><strong>Warning!</strong> You are about to <strong>delete</strong> the following item from the database:</p>
             <ul class="delete">
                 <li><strong><?php echo $item->title() ?></strong>
                     <?php
@@ -39,7 +39,7 @@
                         ->all();
                     $y = $authors->count();
                     if ($y != 0) {
-                        echo $lang['DELETE_AUTHOR_REF'];
+                        echo 'By';
                     }
                     $i = 1;
                     foreach ($authors as $author) {
@@ -51,13 +51,13 @@
                     }
                     ?></strong></li>
             </ul>
-            <p><?php echo $lang['DELETE_CONFIRM']; ?></p>
-            <a class="delete-button" href="delete?<?php echo $id; ?>+execute"><?php echo $lang['DELETE_DELETEBUTTON']; ?></a>
-            <a class="cancel-button" href="display?<?php echo $id; ?>"><?php echo $lang['DELETE_CANCELBUTTON']; ?></a>
+            <p>Are you sure you want to delete this item?</p>
+            <a class="bg-danger color-alpha p-4" href="admin-library-book-delete?<?php echo $id; ?>+execute">Yes</a>
+            <a class="bg-success color-beta p-4" href="/?<?php echo $id; ?>">Cancel</a>
     <?php }
     } ?>
 
     <div class="clear"></div>
 
 </div>
-<?php include_once('snippets/library_footer.php') ?>
+<?php include_once('snippets/admin_footer.php') ?>

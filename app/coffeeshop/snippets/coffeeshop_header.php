@@ -65,4 +65,3 @@ if (logged_in() == false) {
                   <section class="main-content-area bg-beta">
                         <div>
                         <?php } ?>
-                        <?php ob_end_flush(); ?>

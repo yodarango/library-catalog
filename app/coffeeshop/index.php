@@ -28,5 +28,8 @@ $coffees = $collection->select('*')->order('name ASC')->all();
 </div>
 
 <?php
+include_once('snippets/app_footer.php');
+?>
+<?php
 include_once('app/snippets/app_footer.php');
 ?>
