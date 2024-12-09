@@ -1,6 +1,5 @@
 <?php
-include_once('config/config.php');
-include_once('toolkit/bootstrap.php');
+include_once('snippets/admin_header.php');
 
 // Establish database connection
 $db = new Database(array(
@@ -11,98 +10,40 @@ $db = new Database(array(
       'password' => $password
 ));
 
-// TODO: FIX THIS SO THE REQUEST MAY BE ARCHIVED
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//       $id = $_POST['id'];
-
-//       // Connessione al database
-//       $collection = $db->table('prayer_requests');
-
-//       // Verifica che la connessione sia riuscita
-//       if ($collection) {
-//             // Aggiorna il campo is_archived a 1 per l'id specificata
-//             if (is_numeric($id)) {
-//                   $updated = $collection->where("id", $id)->limit(1)->update(['is_archived' => 1]);
-//             }
-//             // Reindirizza alla stessa pagina per evitare il re-invio del form
-//             header("Location: " . $_SERVER['PHP_SELF']);
-//             exit();
-//       } else {
-//             echo "Errore: Impossibile accedere alla tabella 'prayer_requests'.";
-//       }
-// }
-
 // Connessione al database
 $collection = $db->table('prayer_requests');
 
 // Ottieni tutti i dati dalla tabella prayer_requests
 $prayerRequests = $collection->select('*')->where("is_archived = 0")->order('created_at DESC')->all();
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+      $id = $_POST['id'];
+
+      if ($collection) {
+            if (is_numeric($id)) {
+                  $updated = $collection->where("id", "=", $id)->limit(1)->update(['is_archived' => 1]);
+
+                  header("Location: " . $_SERVER['PHP_SELF']);
+            } else {
+                  echo "Errore: Impossibile accedere alla tabella 'prayer_requests'.";
+            }
+      }
+}
+
 ?>
 
-<!DOCTYPE html>
-<html lang="it">
+<h2 class="mb-4">Prayer requests <?= count($prayerRequests) ?></h2>
+<?php foreach ($prayerRequests as $request): ?>
+      <div class="p-4 bg-gamma rounded mb-4">
+            <h3 class="mb-2"><?= $request->name ?></h3>
+            <p class="mb-2"><?= $request->description ?></p>
+            <p class="color-lambda mb-2"><?= $request->email ?></p>
+            <i class="opacity-70 mb-4 d-block"><?= date("m/d/Y H:i", strtotime($request->created_at)) ?></i>
+            <form action="/admin" method="POST" class="w-100">
+                  <input type="hidden" name="id" value="<?= htmlspecialchars($request->id) ?>">
+                  <button type="submit" class="bg-warning rounded color-beta w-100">Archive </button>
+            </form>
+      </div>
+<?php endforeach; ?>
 
-<head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Prayer Requests</title>
-      <style>
-            table {
-                  width: 100%;
-                  border-collapse: collapse;
-            }
-
-            table,
-            th,
-            td {
-                  border: 1px solid black;
-            }
-
-            th,
-            td {
-                  padding: 8px;
-                  text-align: left;
-            }
-
-            th {
-                  background-color: #f2f2f2;
-            }
-      </style>
-</head>
-
-<body>
-
-      <h2>Prayer Requests</h2>
-
-      <table>
-            <tr>
-                  <th>ID</th>
-                  <th>Nome</th>
-                  <th>Email</th>
-                  <th>Telefono</th>
-                  <th>Descrizione</th>
-                  <th>Data di Creazione</th>
-                  <th>Azioni</th>
-            </tr>
-            <?php foreach ($prayerRequests as $request): ?>
-                  <tr>
-                        <td><?= htmlspecialchars($request->id) ?></td>
-                        <td><?= htmlspecialchars($request->name) ?></td>
-                        <td><?= htmlspecialchars($request->email) ?></td>
-                        <td><?= htmlspecialchars($request->phone) ?></td>
-                        <td><?= htmlspecialchars($request->description) ?></td>
-                        <td><?= date("m/d/Y H:i", strtotime(htmlspecialchars($request->created_at))) ?></td>
-                        <td>
-                              <form action="/admin" method="POST">
-                                    <input type="hidden" name="id" value="<?= htmlspecialchars($request->id) ?>">
-                                    <button type="submit">Archivia</button>
-                              </form>
-                        </td>
-                  </tr>
-            <?php endforeach; ?>
-      </table>
-
-</body>
-
-</html>
+<?php include_once('snippets/admin_footer.php'); ?>

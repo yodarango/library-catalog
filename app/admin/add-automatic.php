@@ -1,4 +1,8 @@
+<?php include_once('snippets/admin_header.php'); ?>
+
 <?php
+
+ob_start();
 if (isset($_GET['isbn'])) {
       $isbn = htmlspecialchars($_GET['isbn']);
 
@@ -37,16 +41,6 @@ if (isset($_GET['isbn'])) {
       exit();
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Scan ISBN</title>
-      <script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
-</head>
 
 <body>
       <h1>Scan ISBN</h1>

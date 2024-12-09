@@ -60,3 +60,7 @@ For licensing information of the above third-party components please see `THIRDP
 ## License
 
 Catalog is released under the MIT License. Full text of the license can be found in the `LICENSE` file.
+
+# LEFT OFF
+
+I added functionality to add and delete in the admin library, I need to make sure that images can be uploaded next. Then make sure that the scanner works calling google books.

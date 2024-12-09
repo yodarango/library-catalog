@@ -3,7 +3,7 @@ include_once('snippets/admin_header.php');
 
 // get the search term from the post request
 $term = isset($_POST['term']) ? $_POST['term'] : "";
-$bookId = $_POST ? $_POST['delete-id'] : null;
+$bookId = isset($_POST['delete-id']) ? $_POST['delete-id'] : null;
 
 $collection = $db->table('books');
 
@@ -36,7 +36,7 @@ if (!is_null($bookId) && $_SERVER["REQUEST_METHOD"] === "POST") {
 
       $item = $collection->find($bookId);
 
-      if (isset($item)) { // check if form was submitted
+      if (isset($item)) {
 
             $collection = $db->table('books');
             $author_collection = $db->table('authors');
@@ -58,7 +58,13 @@ if (!is_null($bookId) && $_SERVER["REQUEST_METHOD"] === "POST") {
             <span class=" color-lambda">Add new book</span>
       </a>
 </div>
-<h3 class="my-4">Browse all <?php echo $books->count() ?> books</h3>
+<?php if (count($books) == 0): ?>
+      <div role="alert" class="bg-info rounded p-4">
+            <p class="color-beta">No books found.</p>
+      </div>
+<?php else: ?>
+      <h3 class="my-4">Browse all <?php echo $books->count() ?> books</h3>
+<?php endif; ?>
 <div class="item-list">
 
       <?php foreach ($books as $book): ?>
