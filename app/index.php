@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <li><a href="/library">Library</a></li>
                         <li><a href="coffeeshop">Coffeeshop</a></li>
                         <?php if (is_admin()) { ?>
-                              <li><a href="/admin-library">Admin</a></li>
+                              <li><a href="/admin-prayer">Admin</a></li>
                         <?php } ?>
                         <?php if (logged_in()) { ?>
                               <li><a href="/logout"><button class="logout-in-button">Logout</button></a></li>

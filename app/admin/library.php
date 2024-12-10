@@ -45,8 +45,6 @@ if (!is_null($bookId) && $_SERVER["REQUEST_METHOD"] === "POST") {
             if (($collection->where('id', '=', $bookId)->delete()) && ($author_collection->where('book_id', '=', $bookId)->delete()) && ($genre_collection->where('book_id', '=', $bookId)->delete())) {
             }
 
-            // echo '<div class="bg-success color-beta p-2 rounded d-flex align-items-center justify-content-between"><p class="w-100"> Item successfully deleted from your collection. </p> <a class="bg-beta color-success p-4 rounded d-block flex-shrink-0" href="/admin/library">Reload</a>.</div>';
-            // reload the page
             header("Location: /admin-library");
       }
 }

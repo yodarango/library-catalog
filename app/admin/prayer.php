@@ -32,14 +32,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
 
 ?>
 
-<h2 class="mb-4">Prayer requests <?= count($prayerRequests) ?></h2>
+<?php if (count($prayerRequests) == 0): ?>
+      <div role="alert" class="bg-info rounded p-4">
+            <p class="color-beta">There are no new prayer requests.</p>
+      </div>
+<?php else: ?>
+      <h2 class="mb-4">Prayer requests <?= count($prayerRequests) ?></h2>
+<?php endif; ?>
+
 <?php foreach ($prayerRequests as $request): ?>
       <div class="p-4 bg-gamma rounded mb-4">
             <h3 class="mb-2"><?= $request->name ?></h3>
             <p class="mb-2"><?= $request->description ?></p>
             <p class="color-lambda mb-2"><?= $request->email ?></p>
             <i class="opacity-70 mb-4 d-block"><?= date("m/d/Y H:i", strtotime($request->created_at)) ?></i>
-            <form action="/admin" method="POST" class="w-100">
+            <form action="/admin-prayer" method="POST" class="w-100">
                   <input type="hidden" name="id" value="<?= htmlspecialchars($request->id) ?>">
                   <button type="submit" class="bg-warning rounded color-beta w-100">Archive </button>
             </form>
