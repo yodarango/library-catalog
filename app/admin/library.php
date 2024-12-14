@@ -84,14 +84,19 @@ if (!is_null($bookId) && $_SERVER["REQUEST_METHOD"] === "POST") {
                         </div>
                   </a>
 
-                  <form action="/admin-library" id="delete-id" method="post" class="d-flex align-items-center justify-content-start column-gap-2">
-                        <input class="search-form p-2 rounded w-100 d-block" name="delete-id"
-                              value="<?php echo $book->id(); ?>" type="hidden" />
-                        <button class="d-block bg-danger p-4 color-alpha" type="submit"
-                              value="Delete item">
-                              <i class="fa fa-trash" aria-hidden="true"></i>
-                        </button>
-                  </form>
+                  <div class="d-flex flex-column align-items-center justify-content-center gap-2">
+                        <a href="/admin-library-book-edit?id=<?php echo $book->id() ?>" class="btn bg-lambda">
+                              <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                        <form action="/admin-library" id="delete-id" method="post" class="d-flex align-items-center justify-content-start column-gap-2 ">
+                              <input class="search-form p-2 rounded w-100 d-block" name="delete-id"
+                                    value="<?php echo $book->id(); ?>" type="hidden" />
+                              <button class="d-block bg-danger btn color-alpha" type="submit"
+                                    value="Delete item">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                              </button>
+                        </form>
+                  </div>
             </div>
 
       <?php endforeach; ?>

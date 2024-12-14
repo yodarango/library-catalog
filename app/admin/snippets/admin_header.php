@@ -61,22 +61,24 @@ if (logged_in() == false) {
                   <!-- header -->
                   <header class="admin-header d-flex align-items-center justify-content-start bg-zeta">
                         <div class="d-flex align-items-center justify-content-between w-100">
-                              <a class="library-logo flex-shrink-0" href="index">
+                              <a class="logo flex-shrink-0" href="index">
                                     <img src="assets/icons/favicon.png" alt="Library icon ">
                               </a>
                               <?php
                               $term = isset($_POST["term"]) ? $_POST['term'] : "";
                               ?>
-                              <div class="global-search w-100">
-                                    <form action="/admin-library" id="searchform" method="post" class="d-flex align-items-center justify-content-start column-gap-2">
-                                          <input class="search-form p-2 rounded w-100 d-block" type="text" name="term"
-                                                placeholder="Search for a book" value="<?php echo $term ?>" />
-                                          <button class="search-button bg-nu p-0" type="submit"
-                                                value="Search collection">
-                                                <i class="fa fa-search" aria-hidden="true"></i>
-                                          </button>
-                                    </form>
-                              </div>
+                              <?php if ($path == '/admin-library') { ?>
+                                    <div class="global-search w-100">
+                                          <form action="/admin-library" id="searchform" method="post" class="w-100 d-flex align-items-center justify-content-start column-gap-2">
+                                                <input class="search-form p-2 rounded w-100 d-block" type="text" name="term"
+                                                      placeholder="Search for a book" value="<?php echo $term ?>" />
+                                                <button class="search-button bg-nu p-0" type="submit"
+                                                      value="Search collection">
+                                                      <i class="fa fa-search" aria-hidden="true"></i>
+                                                </button>
+                                          </form>
+                                    </div>
+                              <?php } ?>
                         </div>
                   </header>
                   <section class="main-content-area bg-beta">

@@ -64,19 +64,20 @@ if (logged_in() == false) {
 					<?php
 					$term = isset($_POST["term"]) ? $_POST['term'] : "";
 					?>
-					<div class="global-search w-100">
-						<form action="library" id="searchform" method="post" class="d-flex align-items-center justify-content-start column-gap-2">
-							<input class="search-form p-2 rounded w-100 d-block" type="text" name="term"
-								placeholder="Search for a book" value="<?php echo $term ?>" />
-							<button class="search-button bg-nu p-0" type="submit"
-								value="Search collection">
-								<i class="fa fa-search" aria-hidden="true"></i>
-							</button>
-						</form>
-					</div>
+					<?php if ($path == '/library') : ?>
+						<div class="global-search w-100">
+							<form action="library" id="searchform" method="post" class="d-flex align-items-center justify-content-start column-gap-2">
+								<input class="search-form p-2 rounded w-100 d-block" type="text" name="term"
+									placeholder="Search for a book" value="<?php echo $term ?>" />
+								<button class="search-button bg-nu p-0" type="submit"
+									value="Search collection">
+									<i class="fa fa-search" aria-hidden="true"></i>
+								</button>
+							</form>
+						</div>
+					<?php endif; ?>
 				</div>
 			</header>
 			<section class="main-content-area bg-beta">
 				<div>
 				<?php } ?>
-				<?php ob_end_flush(); ?>

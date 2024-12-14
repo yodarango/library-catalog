@@ -30,6 +30,7 @@ function get_active_class($page)
 </section>
 <footer class="footer">
 </footer>
+<?php ob_end_flush(); ?>
 </body>
 
 </html>

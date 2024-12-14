@@ -1,20 +1,29 @@
-<?php include_once('snippets/library_header.php') ?>
-
 <?php
+include_once('snippets/library_header.php');
+include_once('app/snippets/logged-in.php');
+
 $collection = $db->table('books');
 
-$url = $_SERVER['REQUEST_URI'];
-$id = parse_url($url, PHP_URL_QUERY);
+$path = $_SERVER['REQUEST_URI'];
+$parsedPath = parse_url($path, PHP_URL_QUERY);
 $bookid = null;
 
 // Verifica se l'URL contiene 'id=' o 'borrow-id='
-parse_str($id, $queryParams);
+parse_str($parsedPath, $queryParams);
 if (isset($queryParams['id'])) {
 	$bookid = $queryParams['id'];
 }
 
 if ($bookid !== null) {
 	$item = $collection->find($bookid);
+}
+
+// Borrowing a book
+if (isset($_POST["id"]) && $_SERVER['REQUEST_METHOD'] === 'POST') {
+	$collection->where('id =' . $_POST["id"])->update(['lentto' => $_SESSION['username'], 'lentat' => date('Y-m-d'), 'islent' => '$_POST["is_lent"]']);
+
+	// redirect to the book page
+	header('Location: /library-book?id=' . $_POST["id"]);
 }
 
 if (isset($item)) {
@@ -36,13 +45,11 @@ if (isset($item)) {
 		$button_class = "bg-upsilon color-beta";
 		$is_disabled = true;
 	}
-
-	// button class
-
-
 ?>
 
-
+	<script>
+		console.log(<?= json_encode(is_admin()) ?>)
+	</script>
 	<div class="book-detail-container gap-4">
 		<div class="book-detail-image d-flex align-items-center justify-content-center">
 			<img src="<?php echo $item->imgpath(); ?>" alt="<?php echo $item->title(); ?>">
@@ -53,9 +60,10 @@ if (isset($item)) {
 			<p class="book-year color-zeta"><i class="fa-calendar fa me-2 d-inline-block color-zeta"></i> <span><?php echo $item->year(); ?></span></p>
 			<p class="book-description color-zeta"><i class="color-zeta fa-building fa me-2 d-inline-block"></i> <span><?php echo $item->publisher(); ?></span></p>
 			<p class="book-description color-zeta mb-2"><i class="color-zeta fa-tags fa me-2 d-inline-block"></i> <span><?php echo $item->genre(); ?></span></p>
-			<!-- if this is an admin they should be able to delete and edit  -->
-			<?php if (!logged_in()) { ?>
-				<form method="POST" action="/borrow">
+
+			<!-- Admins should not be able to lend books. Only normal users -->
+			<?php if (logged_in()) { ?>
+				<form method="POST" action="/library-book?id=<?= $bookid ?>">
 					<input type="hidden" name="id" value="<?php echo $bookid; ?>">
 					<input type="hidden" name="is_lent" value="<?php echo $item->islent() ? "0" : "1"; ?>">
 					<button type="submit" class="borrow-book p-2 <?php echo $button_class ?> color-alpha rounded d-block w-100" <?php echo $is_disabled ? "disabled" : "" ?>>
@@ -69,11 +77,20 @@ if (isset($item)) {
 					<span>Borrow</span>
 				</a>
 			<?php } ?>
+
+			<!-- if this is an admin they should be able to delete and edit  -->
 			<?php
-			include_once('app/snippets/logged-in.php');
-			if (is_admin() == true) { ?>
+			if (is_admin() && strpos($parsedPath, "/admin-library-book") !== false) { ?>
 				<div class="book-actions mt-2 d-flex align-items-center justify-content-center gap-2">
-					<a class="item-action delete p-2 bg-danger color-alpha rounded d-block w-100 flex-shrink-1" href="delete?<?php echo $bookid; ?>"><i class="fa fa-trash me-2" aria-hidden="true"></i><span>Delete</span></a>
+					<form action="/admin-library" id="delete-id" method="post" class="d-flex align-items-center justify-content-start column-gap-2 w-100">
+						<input class="search-form p-2 rounded w-100 d-block" name="delete-id"
+							value="<?php echo $item->id(); ?>" type="hidden" />
+						<button class="d-block bg-danger p-2 color-alpha w-100" type="submit"
+							value="Delete item">
+							<i class="fa fa-trash" aria-hidden="true"></i>
+							<span>Delete</span>
+						</button>
+					</form>
 					<a class="item-action edit p-2 bg-info color-beta rounded d-block w-100 flex-shrink-1" href="admin-library-book-edit?id=<?php echo $bookid ?>"><i class="fa fa-pencil-square-o me-2" aria-hidden="true"></i><span>Edit</span></a>
 				</div>
 

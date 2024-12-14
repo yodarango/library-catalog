@@ -1,14 +1,24 @@
 <?php
-include_once('snippets/admin_header.php'); ?>
+include_once('app/admin/snippets/admin_header.php'); ?>
 
 <?php
 
+$coffeeId = isset($_POST['id']) ? $_POST['id'] : null;
+
+$url = $_SERVER['REQUEST_URI'];
+$parseUrl = parse_url($url, PHP_URL_QUERY);
+$urlId = str_replace('id=', '', $parseUrl);
+
+// get the coffee for the id
+$collection = $db->table('coffees');
+$coffee = $collection->find($urlId);
+
+$errors = [];
+$success = '';
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $thumbnail = '';
-      $errors = [];
-      $success = '';
 
       if (isset($_FILES['thumbnail']) && $_FILES['thumbnail']['size'] > 0) {
             $file = $_FILES['thumbnail'];
@@ -35,8 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         }
                   }
 
-                  // echo '<script>console.log(' . json_encode(is_dir($upload_dir)) . ')</script>';
-                  // return;
                   $file_name = uniqid() . '-' . basename($file['name']);
                   $file_path = $upload_dir . $file_name;
 
@@ -52,20 +60,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $description = $_POST['description'];
             $price = $_POST['price'];
 
-            $collection->insert(array(
-                  'name' => $name,
-                  'description' => $description,
-                  'price' => $price,
-                  'thumbnail' => $thumbnail
-            ));
+            if ($coffeeId) {
+                  $collection->where('id', '=', $coffeeId)->update(array(
+                        'name' => $name,
+                        'description' => $description,
+                        'price' => $price,
+                        'thumbnail' => $thumbnail
+                  ));
+            } else {
 
+                  $collection->insert(array(
+                        'name' => $name,
+                        'description' => $description,
+                        'price' => $price,
+                        'thumbnail' => $thumbnail
+                  ));
+            }
             if (empty($errors)) {
-                  $success = 'Coffee item added successfully.';
+                  $success = 'Coffee edited successfully.';
+                  // reload the page
+                  header("Location: /admin-coffeeshop");
             }
       } else {
             $errors[0] = 'No file uploaded';
       }
 }
+
+// shorten the thumbnail path
+$explodedThumbnail = explode("/", $coffee->thumbnail());
+$thumbnail = end($explodedThumbnail);
+
 ?>
 
 <!DOCTYPE html>
@@ -79,10 +103,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <style>
             .toast-container {
                   animation: hide 3s forwards;
-            }
-
-            .fa-check {
-                  display: none;
             }
 
             /* hide after 3 seconds */
@@ -110,53 +130,78 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
+
       <main class="main-content-area">
             <div>
+                  <div class="d-flex align-items-center justify-content-start mb-4">
+                        <a href="/admin-coffeeshop">Back</a>
+                  </div>
+                  <?php if ($success != ''): ?>
+                        <p class="bg-sigma color-beta success p-2 toast-container"><?php echo $success; ?></p>
+                  <?php endif; ?>
+                  <?php if (count($errors) > 0): ?>
+                        <?php foreach ($errors as $error) : ?>
+                              <p class="p-2 color-alpha bg-phi "><?php echo $error; ?></p>
+                        <?php endforeach; ?>
+                  <?php endif; ?>
                   <p class="mb-6">Add a new item to the coffee shop below 🛍️</p>
+                  <?php if ($coffee->thumbnail()): ?>
+                        <div class="bg-gamma p-4 rounded">
+                              <div class="rounded m-auto coffeeshop-thumbnail">
+                                    <img src="<?= $coffee->thumbnail() ?>" alt="<?= $coffee->name() ?>">
+                              </div>
+                        </div>
+                  <?php endif; ?>
                   <form method="post" enctype="multipart/form-data" action="">
-                        <?php if (isset($errors)): ?>
-                              <?php foreach ($errors as $error) : ?>
-                                    <p class="p-2 color-alpha bg-phi "><?php echo $error; ?></p>
-                              <?php endforeach; ?>
-                        <?php endif; ?>
-                        <?php if (isset($success)): ?>
-                              <p class="bg-sigma color-beta success p-2 toast-container"><?php echo $success; ?></p>
-                        <?php endif; ?>
+
+
+                        <input type="hidden" name="id" value="<?= $coffee->id(); ?>">
+
                         <div class="my-4">
                               <label for="name" class="d-block mb-2">Name</label>
-                              <input type="text" name="name" id="name" required class="border border-delta p-2 w-100">
+                              <input type="text" name="name" id="name" required class="border border-delta p-2 w-100" value="<?= $coffee->name(); ?>">
                         </div>
 
                         <div class="mb-4">
                               <label for="description" class="d-block mb-2">Description</label>
-                              <textarea name="description" id="description" rows="5" required class="border border-delta p-2 w-100"></textarea>
+                              <textarea name="description" id="description" rows="5" required class="border border-delta p-2 w-100"><?= $coffee->description(); ?></textarea>
                         </div>
                         <div class="mb-4">
                               <label for="price" class="d-block mb-2">Price</label>
-                              <input type="number" name="price" id="price" step="0.01" required class="border border-delta w-100 p-2">
+                              <input type="number" name="price" id="price" step="0.01" required class="border border-delta w-100 p-2" value="<?= $coffee->price(); ?>">
                         </div>
                         <div class="mb-4">
                               <label for="thumbnail" class="d-block mb-2">Thumbnail</label>
-                              <div class="d-flex align-items-center justify-content-start column-gap-2 mb-2">
-                                    <span id="fileName" class="file-name"></span>
-                                    <i class="fa fa-check color-sigma" aria-hidden="true"></i>
-                              </div>
-                              <input type="file" name="thumbnail" id="thumbnail" accept="image/*" style="display: none;">
-                              <button type="button" id="customFileButton" class="bg-zeta w-100 rounded-0">Choose File</button>
+                              <?php if ($coffee->thumbnail()): ?>
+                                    <div class="d-flex align-items-center justify-content-start column-gap-2 mb-2">
+                                          <span id="fileName" class="file-name color-success"><?= $thumbnail ?></span>
+                                          <i class="fa fa-check color-sigma" aria-hidden="true"></i>
+                                    </div>
+                              <?php endif ?>
+                              <input type="file" name="thumbnail" id="thumbnail" accept="image/*" style="display: none;" value="<?= $thumbnail ?>">
+                              <?php if ($coffee->thumbnail()): ?>
+                                    <button type="button" id="customFileButton" class="bg-zeta color-beta w-100 rounded-0">Replace thumbnail</button>
+                              <?php else: ?>
+                                    <button type="button" id="customFileButton" class="bg-zeta color-beta w-100 rounded-0">Choose thumbnail</button>
+                              <?php endif; ?>
 
                         </div>
                         <div>
-                              <input type="submit" value="Add Coffee" class="bg-delta p-2 w-100">
+                              <input type="submit" value="Update coffee" class="bg-delta p-2 w-100">
                         </div>
                   </form>
                   <script>
                         document.addEventListener('DOMContentLoaded', function() {
                               const fileInput = document.getElementById('thumbnail');
                               const customFileButton = document.getElementById('customFileButton');
+                              const thumbnail = document.querySelector('.coffeeshop-thumbnail');
                               const fileNameSpan = document.getElementById('fileName');
                               const checkIcon = document.querySelector('.fa-check');
 
                               customFileButton.addEventListener('click', function() {
+                                    fileInput.click();
+                              });
+                              thumbnail?.addEventListener('click', function() {
                                     fileInput.click();
                               });
 
@@ -168,6 +213,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                           fileNameSpan.textContent = '';
                                           checkIcon.style.display = 'none';
                                     }
+
+                                    // change the thumbnail image with the current file
+                                    const thumbnail = document.querySelector('.coffeeshop-thumbnail img');
+                                    thumbnail.src = URL.createObjectURL(fileInput.files[0]);
+
                               });
                         });
                   </script>
@@ -199,4 +249,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </html>
 
-<?php include_once('snippets/admin_footer.php'); ?>
+<?php include_once('app/admin/snippets/admin_footer.php'); ?>

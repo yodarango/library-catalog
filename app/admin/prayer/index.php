@@ -1,5 +1,5 @@
 <?php
-include_once('snippets/admin_header.php');
+include_once('app/admin/snippets/admin_header.php');
 
 // Establish database connection
 $db = new Database(array(
@@ -53,4 +53,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
       </div>
 <?php endforeach; ?>
 
-<?php include_once('snippets/admin_footer.php'); ?>
+<?php include_once('app/admin/snippets/admin_footer.php'); ?>

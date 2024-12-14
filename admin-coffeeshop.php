@@ -1,1 +1,1 @@
-<?php include_once('app/admin/coffeeshop.php');
+<?php require_once('app/admin/coffeeshop/index.php');

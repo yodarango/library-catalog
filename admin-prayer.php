@@ -1,2 +1,2 @@
 <?php
-include_once('app/admin/prayer.php');
+include_once('app/admin/prayer/index.php');
