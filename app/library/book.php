@@ -20,7 +20,7 @@ if ($bookid !== null) {
 
 // Borrowing a book
 if (isset($_POST["id"]) && $_SERVER['REQUEST_METHOD'] === 'POST') {
-	$collection->where('id =' . $_POST["id"])->update(['lentto' => $_SESSION['username'], 'lentat' => date('Y-m-d'), 'islent' => '$_POST["is_lent"]']);
+	$collection->where('id =' . $_POST["id"])->update(['lentto' => $_SESSION['username'], 'lentat' => date('Y-m-d'), 'islent' => $_POST["is_lent"], 'lentto' => $_POST["is_lent"] == true ? $_SESSION['username'] : null]);
 
 	// redirect to the book page
 	header('Location: /library-book?id=' . $_POST["id"]);
@@ -48,9 +48,9 @@ if (isset($item)) {
 ?>
 
 	<script>
-		console.log(<?= json_encode(is_admin()) ?>)
+		console.log(<?= json_encode($_POST) ?>)
 	</script>
-	<div class="book-detail-container gap-4">
+	<div class="book-detail-container gap-4 mb-4">
 		<div class="book-detail-image d-flex align-items-center justify-content-center">
 			<img src="<?php echo $item->imgpath(); ?>" alt="<?php echo $item->title(); ?>">
 		</div>
@@ -63,14 +63,16 @@ if (isset($item)) {
 
 			<!-- Admins should not be able to lend books. Only normal users -->
 			<?php if (logged_in()) { ?>
-				<form method="POST" action="/library-book?id=<?= $bookid ?>">
-					<input type="hidden" name="id" value="<?php echo $bookid; ?>">
-					<input type="hidden" name="is_lent" value="<?php echo $item->islent() ? "0" : "1"; ?>">
-					<button type="submit" class="borrow-book p-2 <?php echo $button_class ?> color-alpha rounded d-block w-100" <?php echo $is_disabled ? "disabled" : "" ?>>
-						<i class="fa fa-exchange me-2" aria-hidden="true"></i>
-						<span><?php echo $borrow_button_label; ?></span>
-					</button>
-				</form>
+				<?php if (!is_admin()) { ?>
+					<form method="POST" action="/library-book?id=<?= $bookid ?>">
+						<input type="hidden" name="id" value="<?php echo $bookid; ?>">
+						<input type="hidden" name="is_lent" value="<?php echo $item->islent() ? "0" : "1"; ?>">
+						<button type="submit" class="borrow-book p-2 <?php echo $button_class ?> color-alpha rounded d-block w-100" <?php echo $is_disabled ? "disabled" : "" ?>>
+							<i class="fa fa-exchange me-2" aria-hidden="true"></i>
+							<span><?php echo $borrow_button_label; ?></span>
+						</button>
+					</form>
+				<?php } ?>
 			<?php } else { ?>
 				<a class="borrow-book p-2 bg-zeta color-alpha rounded d-block w-100 d-flex align-items-center justify-content-center" href="/login">
 					<i class="fa fa-exchange me-2" aria-hidden="true"></i>
