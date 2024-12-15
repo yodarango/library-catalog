@@ -46,10 +46,6 @@ if (isset($item)) {
 		$is_disabled = true;
 	}
 ?>
-
-	<script>
-		console.log(<?= json_encode($_POST) ?>)
-	</script>
 	<div class="book-detail-container gap-4 mb-4">
 		<div class="book-detail-image d-flex align-items-center justify-content-center">
 			<img src="<?php echo $item->imgpath(); ?>" alt="<?php echo $item->title(); ?>">
