@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <?php foreach ($books as $book): ?>
         <!-- <?php var_dump($book); ?> -->
         <a href="library-book?id=<?php echo $book->id() ?>">
-            <div class="book-card">
+            <div class="book-card border">
                 <div class="book-card-image">
                     <img src="<?php echo $book->imgpath() ?>" alt="<?php echo $book->title() ?>">
                 </div>

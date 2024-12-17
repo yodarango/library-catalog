@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
       <div class="p-4 bg-gamma rounded mb-4">
             <h3 class="mb-2"><?= $request->name ?></h3>
             <p class="mb-2"><?= $request->description ?></p>
-            <p class="color-lambda mb-2"><?= $request->email ?></p>
+            <p class="color-epsilon mb-2"><?= $request->email ?></p>
             <i class="opacity-70 mb-4 d-block"><?= date("m/d/Y H:i", strtotime($request->created_at)) ?></i>
             <form action="/admin-prayer" method="POST" class="w-100">
                   <input type="hidden" name="id" value="<?= htmlspecialchars($request->id) ?>">

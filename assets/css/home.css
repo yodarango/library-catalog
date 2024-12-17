@@ -1,11 +1,23 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lobster&display=swap");
 
-/*
-	Hielo by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
-*/
+/* token overwrite */
+:root {
+  color-scheme: dark;
+  --dr-alpha: #efefef;
+  --dr-alpha-rgb: 239, 239, 239;
+  --dr-beta: #000000;
+  --dr-beta-rgb: 0, 0, 0;
+  --dr-gamma: #1a1c1a;
+  --dr-gamma-rgb: 26, 28, 26;
+  --dr-delta: #1f846d;
+  --dr-delta-rgb: 31, 132, 109;
+  --dr-epsilon: #12ffe4;
+  --dr-epsilon-rgb: 18, 255, 228;
+  --dr-zeta: #6b7774;
+  --dr-zeta-rgb: 178, 147, 254;
+  --dr-info: #12ffe4;
+}
 
 * {
   box-sizing: border-box;
@@ -279,6 +291,7 @@ h6 {
 
 /* Header */
 .header {
+  container-type: inline-size;
   background: rgba(0, 0, 0, 0.975);
   width: 100%;
   z-index: 10;
@@ -302,6 +315,13 @@ h6 {
   display: block;
   width: 8rem;
   height: 8rem;
+}
+
+@media (max-width: 480px) {
+  .logo {
+    width: 5rem;
+    height: 5rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -485,7 +505,7 @@ h6 {
 
 .beliefs > div .fa {
   flex-shrink: 0;
-  color: #12ffe4;
+  color: var(--dr-epsilon);
   font-size: 6rem;
   width: 10rem;
 }
@@ -514,13 +534,13 @@ h6 {
 }
 
 .footer .icons li a {
-  color: #11e0b0;
+  color: var(--dr-epsilon);
   font-size: 3.2rem;
   text-decoration: none;
 }
 
 .footer .icons li a:hover {
-  color: #0fb89c;
+  color: var(--dr-delta);
 }
 
 /* TSCA section */
@@ -658,7 +678,7 @@ h6 {
 }
 
 .open-modal-button {
-  background-color: #1f846d;
+  background-color: var(--dr-delta);
   color: white;
   padding: 10px 20px;
   border: none;
@@ -669,7 +689,7 @@ h6 {
 }
 
 .open-modal-button:hover {
-  background-color: #1f846d;
+  background-color: var(--dr-delta);
 }
 
 .modal form {
@@ -692,14 +712,14 @@ h6 {
 
 .modal form input:focus,
 .modal form textarea:focus {
-  border: 1px solid #12ffe4;
-  box-shadow: 0 0 5px #12ffe4;
+  border: 1px solid var(--dr-epsilon);
+  box-shadow: 0 0 5px var(--dr-epsilon);
 }
 
 .modal form button {
   margin-top: 20px;
   padding: 10px;
-  background-color: #1f846d;
+  background-color: var(--dr-delta);
   color: white;
   border: none;
   border-radius: 5px;
@@ -707,7 +727,7 @@ h6 {
 }
 
 .modal form button:hover {
-  background-color: #1f846d;
+  background-color: var(--dr-delta);
 }
 
 /* Toast styles */
@@ -778,7 +798,7 @@ h6 {
 }
 
 .logout-in-button {
-  background-color: #12ffe4;
+  background-color: var(--dr-epsilon);
   color: #000;
   padding: 10px 20px;
   border: none;

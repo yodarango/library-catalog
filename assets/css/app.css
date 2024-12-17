@@ -1,3 +1,21 @@
+/* token overwrite */
+:root {
+  color-scheme: dark;
+  --dr-alpha: #efefef;
+  --dr-alpha-rgb: 239, 239, 239;
+  --dr-beta: #000000;
+  --dr-beta-rgb: 0, 0, 0;
+  --dr-gamma: #1a1c1a;
+  --dr-gamma-rgb: 26, 28, 26;
+  --dr-delta: #1f846d;
+  --dr-delta-rgb: 31, 132, 109;
+  --dr-epsilon: #12ffe4;
+  --dr-epsilon-rgb: 18, 255, 228;
+  --dr-zeta: #6b7774;
+  --dr-zeta-rgb: 178, 147, 254;
+  --dr-info: #12ffe4;
+}
+
 /* globals  */
 a {
   text-decoration: none;
@@ -36,7 +54,6 @@ input {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-width: 35rem;
 }
 
 .book-actions .item-action {
@@ -58,12 +75,36 @@ input {
 .app-header {
   width: 100vw;
   height: 12rem;
+  container-type: inline-size;
 }
 
 .app-header > div {
   max-width: 80rem;
   margin-left: 4%;
   width: 92%;
+}
+.coffeeshop-logo {
+  width: 8rem;
+  height: 8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--dr-alpha);
+  border-radius: 50%;
+}
+
+@container (max-width: 480px) {
+  .coffeeshop-logo {
+    width: 5rem;
+    height: 5rem;
+  }
+}
+
+.coffeeshop-logo img {
+  width: 50%;
+  height: 80%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .main-content-area {
@@ -163,6 +204,9 @@ input {
     font-size: 12px;
   }
 }
+.coffee-card-container {
+  container-type: inline-size;
+}
 
 .coffee-card img {
   width: 100%;
@@ -170,4 +214,26 @@ input {
   object-fit: cover;
   border-radius: 1rem;
   max-width: 15rem;
+  max-width: 15rem;
+}
+
+@media (max-width: 400px) {
+  .coffee-card {
+    flex-wrap: wrap;
+  }
+  .coffee-card > div,
+  .coffee-card img {
+    width: 100%;
+    max-width: 100%;
+    max-height: 20rem;
+  }
+
+  .coffee-card > div > a {
+    width: 100%;
+  }
+
+  .coffee-card > div > a > button {
+    width: 100%;
+    justify-content: center;
+  }
 }

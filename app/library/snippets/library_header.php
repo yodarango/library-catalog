@@ -56,7 +56,7 @@ if (logged_in() == false) {
 	<body>
 		<main class="main" role="main">
 			<!-- header -->
-			<header class="app-header d-flex align-items-center justify-content-start bg-zeta">
+			<header class="app-header d-flex align-items-center justify-content-start bg-delta">
 				<div class="d-flex align-items-center justify-content-between w-100">
 					<a class="library-logo flex-shrink-0" href="index">
 						<img src="assets/icons/favicon.png" alt="Library icon ">

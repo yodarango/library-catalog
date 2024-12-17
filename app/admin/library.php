@@ -52,8 +52,8 @@ if (!is_null($bookId) && $_SERVER["REQUEST_METHOD"] === "POST") {
 
 <div class="d-flex align-items-center justify-content-end">
       <a href="/admin-library-book-add" class="btn btn-primary flex-shrink-0">
-            <i class="fa fa-plus color-lambda" aria-hidden="true"></i>
-            <span class=" color-lambda">Add new book</span>
+            <i class="fa fa-plus color-epsilon" aria-hidden="true"></i>
+            <span class="color-epsilon">Add new book</span>
       </a>
 </div>
 <?php if (count($books) == 0): ?>
@@ -66,7 +66,7 @@ if (!is_null($bookId) && $_SERVER["REQUEST_METHOD"] === "POST") {
 <div class="item-list">
 
       <?php foreach ($books as $book): ?>
-            <div class="book-card-admin d-flex align-items-start justify-content-start column-gap-2 bg-gamma p-4 rounded mb-4">
+            <div class="book-card-admin d-flex align-items-start justify-content-start column-gap-2 bg-gamma p-4 rounded mb-4 border">
                   <a href="/admin-library-book?id=<?php echo $book->id() ?>" class="d-flex align-items-start justify-content-start  w-100">
                         <div class="book-card-admin-image">
                               <img src="<?php echo $book->imgpath() ? $book->imgpath() : 'assets/icons/book-thumbnail.png' ?>" alt="<?php echo $book->title() ?>">
@@ -85,7 +85,7 @@ if (!is_null($bookId) && $_SERVER["REQUEST_METHOD"] === "POST") {
                   </a>
 
                   <div class="d-flex flex-column align-items-center justify-content-center gap-2">
-                        <a href="/admin-library-book-edit?id=<?php echo $book->id() ?>" class="btn bg-lambda">
+                        <a href="/admin-library-book-edit?id=<?php echo $book->id() ?>" class="btn bg-delta">
                               <i class="fa fa-pencil" aria-hidden="true"></i>
                         </a>
                         <form action="/admin-library" id="delete-id" method="post" class="d-flex align-items-center justify-content-start column-gap-2 ">

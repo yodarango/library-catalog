@@ -32,8 +32,8 @@ if (!is_null($coffeeId) && $_SERVER["REQUEST_METHOD"] === "POST") {
 
 <div class="d-flex align-items-center justify-content-end">
       <a href="/admin-coffeeshop-coffee-add" class="btn btn-primary flex-shrink-0">
-            <i class="fa fa-plus color-lambda" aria-hidden="true"></i>
-            <span class=" color-lambda">Add new coffee</span>
+            <i class="fa fa-plus color-epsilon" aria-hidden="true"></i>
+            <span class=" color-epsilon">Add new coffee</span>
       </a>
 </div>
 <?php if (count($coffees) == 0): ?>

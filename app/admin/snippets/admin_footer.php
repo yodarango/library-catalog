@@ -12,7 +12,7 @@ function get_active_class($page)
 }
 ?>
 
-<section class="bottom-menu">
+<section class="bottom-menu border-to border-epsilon border-top">
       <ul class="bottom-menu-list">
             <li class="bottom-menu_item browse <?php get_active_class("prayer") ?>"><a href="/admin-prayer"><i class="fa fa-list" aria-hidden="true"></i><span>Prayers</span></a></li>
             <li class="bottom-menu_item browse <?php get_active_class("library") ?>"><a href="/admin-library"><i class="fa fa-book" aria-hidden="true"></i><span>Library</span></a></li>

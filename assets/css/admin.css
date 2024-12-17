@@ -1,3 +1,21 @@
+/* token overwrite */
+:root {
+  color-scheme: dark;
+  --dr-alpha: #efefef;
+  --dr-alpha-rgb: 239, 239, 239;
+  --dr-beta: #000000;
+  --dr-beta-rgb: 0, 0, 0;
+  --dr-gamma: #1a1c1a;
+  --dr-gamma-rgb: 26, 28, 26;
+  --dr-delta: #1f846d;
+  --dr-delta-rgb: 31, 132, 109;
+  --dr-epsilon: #12ffe4;
+  --dr-epsilon-rgb: 18, 255, 228;
+  --dr-zeta: #6b7774;
+  --dr-zeta-rgb: 178, 147, 254;
+  --dr-info: #12ffe4;
+}
+
 /* globals */
 .add-item-input {
   width: 100%;
@@ -9,6 +27,7 @@
 
 /* header */
 .admin-header {
+  container-type: inline-size;
   width: 100vw;
   height: 12rem;
 }
@@ -22,6 +41,15 @@
 .logo {
   width: 8rem;
   height: 8rem;
+  background-color: white;
+  border-radius: 50%;
+}
+
+@container (max-width: 480px) {
+  .logo {
+    width: 5rem;
+    height: 5rem;
+  }
 }
 
 .logo img {
@@ -92,7 +120,7 @@
 }
 
 .bottom-menu_item.active {
-  background-color: var(--dr-delta);
+  background-color: var(--dr-epsilon);
   font-weight: bold;
 }
 
@@ -104,7 +132,7 @@
 
 .bottom-menu_item.active i,
 .bottom-menu_item.active span {
-  color: var(--dr-alpha);
+  color: var(--dr-beta);
 }
 
 .bottom-menu_item span {
@@ -132,6 +160,50 @@
 }
 
 /* library  */
+.item-list {
+  container-type: inline-size;
+}
+
+.book-card-admin > a {
+  text-decoration: none;
+}
+
+@container (max-width: 400px) {
+  .book-card-admin {
+    flex-wrap: wrap;
+  }
+
+  .book-card-admin > a {
+    flex-wrap: wrap;
+  }
+
+  .book-card-admin > a div {
+    width: 100%;
+  }
+
+  .book-card-admin > a div > img {
+    margin: auto;
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 20rem;
+  }
+
+  .book-card-admin > div {
+    width: 100%;
+  }
+
+  .book-card-admin > div > a {
+    width: 100%;
+  }
+
+  .book-card-admin > div > form,
+  .book-card-admin > div > form > button {
+    width: 100%;
+  }
+}
+
 .book-card-admin-image img {
   width: 100%;
   height: 100%;
