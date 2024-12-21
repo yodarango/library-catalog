@@ -234,3 +234,19 @@
   object-fit: cover;
   object-position: center;
 }
+
+/* Add new back */
+@media (max-width: 480px) {
+  .add-notification {
+    flex-wrap: wrap;
+
+    p {
+      width: 100%;
+      margin-bottom: var(--dr-spacing-4);
+    }
+    a {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}

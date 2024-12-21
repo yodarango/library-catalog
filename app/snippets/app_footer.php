@@ -28,7 +28,7 @@ function get_active_class($page)
             </li>
       </ul>
 </section>
-<footer class="footer">
+<footer class="app-footer">
 </footer>
 <?php ob_end_flush(); ?>
 </body>

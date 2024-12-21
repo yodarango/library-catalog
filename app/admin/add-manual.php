@@ -146,12 +146,12 @@
                 }
 
                 if (isset($bookid)) {
-                    echo '<div class="bg-success color-beta p-2 rounded d-flex align-items-center justify-content-between">
+                    echo '<div class="add-notification bg-success color-beta p-2 rounded d-flex align-items-center justify-content-between">
             <p class="w-100"> Item successfully added to the collection. </p>
             <a class="bg-beta color-success p-4 rounded d-block flex-shrink-0" href="/admin-library">You can now view the item</a>
           </div>';
                 } else {
-                    echo '<div class="bg-danger color-alpha p-2 rounded d-flex align-items-center justify-content-between">
+                    echo '<div class="add-notification bg-danger color-alpha p-2 rounded d-flex align-items-center justify-content-between">
             <p class="w-100"> There was an error adding that item to the collection, sorry! </p>
                         <a class="bg-beta color-danger p-4 rounded d-block flex-shrink-0" href="/admin-library-book-add">You can now view the item</a>
           </div>';

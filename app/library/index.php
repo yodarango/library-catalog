@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 } else {
     // or fetch if not filtering
     $books = $collection
-        ->select(['id', 'title', 'year', 'author', 'imgpath'])
+        ->select(['id', 'title', 'year', 'author', 'imgpath', 'islent'])
         ->order('title', 'ASC')
         ->all();
 }
@@ -39,7 +39,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <!-- <?php var_dump($book); ?> -->
         <a href="library-book?id=<?php echo $book->id() ?>">
             <div class="book-card border">
+                <?php if ($book->islent()) : ?>
+                    <span class="badge bg-warning color-beta p-1 rounded">Unavailable</span>
+                <?php endif ?>
                 <div class="book-card-image">
+
                     <img src="<?php echo $book->imgpath() ?>" alt="<?php echo $book->title() ?>">
                 </div>
                 <div class="book-card-info p-2 bg-gamma">

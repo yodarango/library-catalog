@@ -63,12 +63,19 @@
 }
 
 .book-card {
+  border-radius: 1rem;
   background-color: var(--dr-beta);
-  border-radius: 10px;
   box-shadow: 0 4px 8px rgba(var(--dr-beta-rgb), 0.1);
-  overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   width: 100%;
+  position: relative;
+}
+
+.book-card .badge {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  z-index: 2;
 }
 
 .book-card:hover {
@@ -77,6 +84,8 @@
 }
 
 .book-card-image {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
   width: 100%;
   height: 20rem;
   overflow: hidden;
@@ -91,6 +100,11 @@
 
 .book-card:hover .book-card-image img {
   transform: scale(1.05);
+}
+
+.book-card-info {
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
 }
 
 .book-card-info h5 {

@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && is_null($bookId)) {
 } else {
       // or fetch if not filtering
       $books = $collection
-            ->select(['id', 'title', 'year', 'author', 'imgpath'])
+            ->select(['id', 'title', 'year', 'author', 'imgpath', 'islent'])
             ->order('title', 'ASC')
             ->all();
 }
@@ -72,13 +72,13 @@ if (!is_null($bookId) && $_SERVER["REQUEST_METHOD"] === "POST") {
                               <img src="<?php echo $book->imgpath() ? $book->imgpath() : 'assets/icons/book-thumbnail.png' ?>" alt="<?php echo $book->title() ?>">
                         </div>
                         <div class="book-card-admin-info p-2">
-                              <h5 class="color-alpha mb-1">
+                              <h4 class="color-alpha mb-1">
                                     <?php echo $book->title(); ?>
-                              </h5>
-                              <p class="color-alpha p-0 color-zeta fs-6">
+                              </h4>
+                              <p class="color-alpha p-0 color-zeta fs-5">
                                     <?php echo $book->author(); ?>
                               </p>
-                              <p class="p-0 fs-6 color-alpha">
+                              <p class="p-0 fs-5 color-alpha">
                                     <?php echo strlen($book->description()) > 100 ? substr($book->description(), 0, 100) . '...' : $book->description(); ?>
                               </p>
                         </div>
@@ -96,6 +96,11 @@ if (!is_null($bookId) && $_SERVER["REQUEST_METHOD"] === "POST") {
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                               </button>
                         </form>
+                        <?php if ($book->islent()) { ?>
+                              <button class="btn bg-warning color-beta">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                              </button>
+                        <?php } ?>
                   </div>
             </div>
 

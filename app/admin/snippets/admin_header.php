@@ -3,7 +3,7 @@ ob_start();
 session_start();
 
 include_once('app/snippets/logged-in.php');
-if (logged_in() == false) {
+if (logged_in() == false || !is_admin()) {
       redirect_to("login");
 } else {
       $path = $_SERVER['REQUEST_URI'];

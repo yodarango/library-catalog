@@ -59,21 +59,34 @@ if (isset($item)) {
 
 			<!-- Admins should not be able to lend books. Only normal users -->
 			<?php if (logged_in()) { ?>
-				<?php if (!is_admin()) { ?>
+				<?php if (!$item->islent() && !is_admin()) { ?>
 					<form method="POST" action="/library-book?id=<?= $bookid ?>">
 						<input type="hidden" name="id" value="<?php echo $bookid; ?>">
 						<input type="hidden" name="is_lent" value="<?php echo $item->islent() ? "0" : "1"; ?>">
-						<button type="submit" class="borrow-book p-2 <?php echo $button_class ?> color-alpha rounded d-block w-100" <?php echo $is_disabled ? "disabled" : "" ?>>
+						<button type="submit" class="borrow-book p-2 <?php echo $button_class ?> color-beta rounded d-block w-100" <?php echo $is_disabled ? "disabled" : "" ?>>
 							<i class="fa fa-exchange me-2" aria-hidden="true"></i>
 							<span><?php echo $borrow_button_label; ?></span>
 						</button>
 					</form>
+				<?php } else if ($item->islent()) { ?>
+					<p class="p-4 bg-warning color-beta rounded">
+						<i class="color-zeta
+						fa-user fa me-2 d-inline-block"></i>
+						<span><?php echo $item->lentto(); ?> currently has this book</span>
+					</p>
 				<?php } ?>
 			<?php } else { ?>
-				<a class="borrow-book p-2 bg-zeta color-alpha rounded d-block w-100 d-flex align-items-center justify-content-center" href="/login">
-					<i class="fa fa-exchange me-2" aria-hidden="true"></i>
-					<span>Borrow</span>
-				</a>
+				<?php if ($item->islent()) { ?>
+					<p class="p-4 bg-warning color-beta rounded">
+						<i class="color-zeta fa-user fa me-2 d-inline-block"></i>
+						<span><?php echo $item->lentto(); ?> currently has this book</span>
+					</p>
+				<?php } else { ?>
+					<a class="borrow-book p-2 bg-zeta color-alpha rounded d-block w-100 d-flex align-items-center justify-content-center" href="/login">
+						<i class="fa fa-exchange me-2" aria-hidden="true"></i>
+						<span>Borrow</span>
+					</a>
+				<?php } ?>
 			<?php } ?>
 
 			<!-- if this is an admin they should be able to delete and edit  -->

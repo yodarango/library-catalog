@@ -108,7 +108,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <li><button id="open-modal-button" class="open-modal-button">Prayer request</button></li>
                   </ul>
             </nav>
-
+            <script>
+                  console.log(<?= json_encode($_SESSION) ?>);
+            </script>
             <!-- modal -->
             <div id="modal" class="modal">
                   <div class="modal-content">

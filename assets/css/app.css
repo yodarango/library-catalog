@@ -83,7 +83,8 @@ input {
   margin-left: 4%;
   width: 92%;
 }
-.coffeeshop-logo {
+.coffeeshop-logo,
+.library-logo {
   width: 8rem;
   height: 8rem;
   display: flex;
@@ -94,13 +95,15 @@ input {
 }
 
 @container (max-width: 480px) {
-  .coffeeshop-logo {
+  .coffeeshop-logo,
+  .library-logo {
     width: 5rem;
     height: 5rem;
   }
 }
 
-.coffeeshop-logo img {
+.coffeeshop-logo img,
+.library-logo img {
   width: 50%;
   height: 80%;
   object-fit: cover;
@@ -236,4 +239,14 @@ input {
     width: 100%;
     justify-content: center;
   }
+}
+
+/* footer */
+.app-footer {
+  height: 10rem;
+}
+
+/* auth forms  */
+.auth-form {
+  max-width: 50rem;
 }

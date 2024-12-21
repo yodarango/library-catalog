@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
         ->all();
 
     if ($query->count() != 1) {
-        echo '<p>Error: Invalid username/password combination.</p>';
+        echo '<p class="p-4 bg-danger color-alpha">Error: Invalid username/password combination.</p>';
     } else {
         foreach ($query as $q) {
             $pw = $q->password();
@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
 
                 redirect_to("index");
             } else {
-                echo '<p>Error: Invalid username/password combination.</p>';
+                echo '<p class="p-4 bg-danger color-alpha">Error: Invalid username/password combination.</p>';
             }
         }
     }
@@ -66,19 +66,10 @@ if (isset($_POST['submit'])) {
 <head>
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.danielrangel.net/fullds.min.css">
+    <link rel="stylesheet" href="assets/css/app.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>STWC | login</title>
-
-    <style>
-        form {
-            max-width: 50rem;
-        }
-
-        form input {
-            border: .1rem soli var(--delta);
-        }
-    </style>
 </head>
 
 <body>
@@ -87,7 +78,7 @@ if (isset($_POST['submit'])) {
         <p class="text-center"><?php echo  'Please login to start using the STWC services. ' ?></p>
     </header>
     <section id="setup">
-        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" class="d-bock m-auto">
+        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" class="auth-form d-bock m-auto">
             <div class="mb-4">
                 <label class="d-block mb-2"><?php echo 'Username'; ?></label>
                 <input type="text"
@@ -123,13 +114,10 @@ if (isset($_POST['submit'])) {
                 </div>
             </div>
             <div>
-
-                <button class="w-100 bg-delta w-100" type="submit" name="submit">Login</button>
+                <button class="w-100 bg-delta mb-4" type="submit" name="submit">Login</button>
+                <a class="w-100 bg-epsilon d-block btn color-beta" href="/signup">Signup instead</a>
             </div>
         </form>
-
-
-
     </section>
 </body>
 

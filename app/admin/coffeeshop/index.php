@@ -53,13 +53,13 @@ if (!is_null($coffeeId) && $_SERVER["REQUEST_METHOD"] === "POST") {
                               <img src="<?= $thumbnail ?>" alt="<?php echo $coffee->title() ?>">
                         </div>
                         <div class="coffee-card-admin-info p-2">
-                              <h5 class="color-alpha mb-1">
+                              <h4 class="color-alpha mb-1">
                                     <?php echo $coffee->name(); ?>
-                              </h5>
-                              <p class="p-0 fs-6 color-alpha">
+                              </h4>
+                              <p class="p-0 fs-5 color-alpha">
                                     <?php echo strlen($coffee->description()) > 100 ? substr($coffee->description(), 0, 100) . '...' : $coffee->description(); ?>
                               </p>
-                              <p class="color-alpha p-0 color-zeta fs-6">
+                              <p class="color-alpha p-0 color-zeta fs-5">
                                     <?php echo $coffee->price(); ?>
                               </p>
                         </div>
@@ -74,7 +74,7 @@ if (!is_null($coffeeId) && $_SERVER["REQUEST_METHOD"] === "POST") {
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                               </button>
                         </form>
-                        <a href="/admin-coffeeshop-coffee-edit?id=<?php echo $coffee->id() ?>" class="btn d-block d-block color-alpha p-4 bg-lambda">
+                        <a href="/admin-coffeeshop-coffee-edit?id=<?php echo $coffee->id() ?>" class="btn d-block d-block color-alpha p-4 bg-delta">
                               <i class="fa fa-pencil" aria-hidden="true"></i>
                         </a>
 
