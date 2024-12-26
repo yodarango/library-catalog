@@ -1,5 +1,5 @@
 <?php
-include_once('snippets/admin_header.php');
+include_once('app/admin/snippets/admin_header.php');
 
 // get the search term from the post request
 $term = isset($_POST['term']) ? $_POST['term'] : "";
@@ -107,4 +107,4 @@ if (!is_null($bookId) && $_SERVER["REQUEST_METHOD"] === "POST") {
       <?php endforeach; ?>
 </div>
 
-<?php include_once('snippets/admin_footer.php') ?>
+<?php include_once('app/admin/snippets/admin_footer.php') ?>

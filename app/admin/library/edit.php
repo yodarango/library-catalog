@@ -1,4 +1,4 @@
-<?php include_once('snippets/admin_header.php'); ?>
+<?php include_once('app/admin/snippets/admin_header.php'); ?>
 <h2>
     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit item
 </h2>
@@ -335,4 +335,4 @@
     <div class="clear"></div>
 
 </div>
-<?php include_once('snippets/admin_footer.php') ?>
+<?php include_once('app/admin/snippets/admin_footer.php') ?>

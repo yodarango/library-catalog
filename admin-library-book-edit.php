@@ -1,2 +1,2 @@
 <?php
-require_once('app/admin/edit.php');
+require_once('app/admin/library/edit.php');

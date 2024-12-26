@@ -19,6 +19,9 @@ function get_active_class($page)
             <?php if (is_admin()) { ?>
                   <li class="bottom-menu_item add <?php get_active_class("library") ?>"><a href="/library"><i class="fa fa-book" aria-hidden="true"></i><span>Library</span></a></li>
             <?php } ?>
+            <?php if (logged_in()) { ?>
+                  <li class="bottom-menu_item add <?php get_active_class("add") ?>"><a href="/ministers-office"><i class="fa fa-building" aria-hidden="true"></i><span>Office</span></a></li>
+            <?php } ?>
             <li class="bottom-menu_item">
                   <?php if (logged_in()) { ?>
                         <a href="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> <span>Log out</span></a>

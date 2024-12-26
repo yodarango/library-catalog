@@ -705,7 +705,8 @@ h6 {
 .modal form textarea {
   padding: 10px;
   margin-top: 5px;
-  background-color: #fff;
+  color: var(--dr-beta);
+  background-color: var(--dr-alpha);
   border: none;
   outline: none;
 }
@@ -720,7 +721,7 @@ h6 {
   margin-top: 20px;
   padding: 10px;
   background-color: var(--dr-delta);
-  color: white;
+  color: var(--dr-alpha);
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -735,8 +736,8 @@ h6 {
   visibility: hidden;
   min-width: 250px;
   margin-left: -125px;
-  background-color: #333;
-  color: #fff;
+  background-color: var(--dr-beta);
+  color: var(--dr-alpha);
   text-align: center;
   border-radius: 2px;
   padding: 16px;

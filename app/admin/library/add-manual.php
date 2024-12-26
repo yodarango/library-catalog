@@ -1,4 +1,4 @@
-<?php include_once('snippets/admin_header.php') ?>
+<?php include_once('app/admin/snippets/admin_header.php') ?>
 
 <section class="main-content-area">
     <div>
@@ -210,4 +210,4 @@
     </script>
 </section>
 
-<?php include_once('snippets/admin_footer.php') ?>
+<?php include_once('app/admin/snippets/admin_footer.php') ?>

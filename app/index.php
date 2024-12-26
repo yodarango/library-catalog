@@ -95,7 +95,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                   <ul>
                         <li><a href="/">Home</a></li>
                         <li><a href="/library">Library</a></li>
-                        <li><a href="coffeeshop">Coffeeshop</a></li>
+                        <li><a href="/coffeeshop">Coffeeshop</a></li>
+                        <li><a href="/ministers-office">Minister's Office</a></li>
                         <?php if (is_admin()) { ?>
                               <li><a href="/admin-prayer">Admin</a></li>
                         <?php } ?>
@@ -127,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                               <input type="email" id="email" name="email" maxlength="50">
                               <label for=" text">Prayer Request:</label>
                               <textarea id="text" name="text" required maxlength="1000"></textarea>
-                              <button type="submit">Submit</button>
+                              <button type=" submit">Submit</button>
                         </form>
                   </div>
             </div>

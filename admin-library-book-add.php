@@ -1,2 +1,2 @@
 <?php
-require_once('app/admin/add-manual.php');
+require_once('app/admin/library/add-manual.php');

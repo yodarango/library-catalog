@@ -97,13 +97,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ?>
 
     <header class="p-3 bg-zeta w-100 mb-6">
-        <h1 class="text-center">Welcome</h1>
-        <p class="text-center"><?php echo  'Please signup to start using the STWC services. ' ?></p>
+        <div class="d-flex align-items-center justify-content-between">
+            <a class="header-logo flex-shrink-0" href="index">
+                <img src="assets/icons/favicon.png" alt="Library icon ">
+            </a>
+            <div>
+                <h1 class="text-end">Welcome</h1>
+            </div>
+        </div>
     </header>
 
     <?php if (empty($successMsgs)) { ?>
         <section id="setup">
             <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" class="auth-form d-bock m-auto">
+                <p class="text-center mb-4">Please login to start using the STWC services.</p>
                 <div class="mb-4">
                     <label class="d-block mb-2"><?php echo 'Username'; ?></label>
                     <input type="text"
