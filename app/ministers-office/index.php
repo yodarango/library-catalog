@@ -75,7 +75,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
       if ($affectedRows > 0) {
             $success = true;
-            //reload
             header('Location: /ministers-office');
       }
 }

@@ -134,7 +134,8 @@ $thumbnail = end($explodedThumbnail);
       <main class="main-content-area">
             <div>
                   <div class="d-flex align-items-center justify-content-start mb-4">
-                        <a href="/admin-coffeeshop">Back</a>
+                        <i class="fa fa-arrow-left color-epsilon me-2" aria-hidden="true"></i>
+                        <a href="/admin-coffeeshop" class="color-epsilon">Back</a>
                   </div>
                   <?php if ($success != ''): ?>
                         <p class="bg-sigma color-beta success p-2 toast-container"><?php echo $success; ?></p>
@@ -180,14 +181,14 @@ $thumbnail = end($explodedThumbnail);
                               <?php endif ?>
                               <input type="file" name="thumbnail" id="thumbnail" accept="image/*" style="display: none;" value="<?= $thumbnail ?>">
                               <?php if ($coffee->thumbnail()): ?>
-                                    <button type="button" id="customFileButton" class="bg-zeta color-beta w-100 rounded-0">Replace thumbnail</button>
+                                    <button type="button" id="customFileButton" class="bg-zeta color-alpha w-100 rounded-0">Replace thumbnail</button>
                               <?php else: ?>
                                     <button type="button" id="customFileButton" class="bg-zeta color-beta w-100 rounded-0">Choose thumbnail</button>
                               <?php endif; ?>
 
                         </div>
                         <div>
-                              <input type="submit" value="Update coffee" class="bg-delta p-2 w-100">
+                              <input type="submit" value="Save changes" class="bg-delta p-2 w-100">
                         </div>
                   </form>
                   <script>

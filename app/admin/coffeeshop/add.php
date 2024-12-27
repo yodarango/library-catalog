@@ -112,6 +112,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
       <main class="main-content-area">
             <div>
+                  <div class="d-flex align-items-center justify-content-start mb-4">
+                        <i class="fa fa-arrow-left color-epsilon me-2" aria-hidden="true"></i>
+                        <a href="/admin-coffeeshop" class="color-epsilon">Back</a>
+                  </div>
                   <p class="mb-6">Add a new item to the coffee shop below 🛍️</p>
                   <div class="bg-gamma p-4 rounded d-none">
                         <div class="rounded m-auto coffeeshop-thumbnail">
@@ -137,8 +141,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                               <textarea name="description" id="description" rows="5" required class="border border-delta p-2 w-100"></textarea>
                         </div>
                         <div class="mb-4">
-                              <label for="price" class="d-block mb-2">Price</label>
-                              <input type="number" name="price" id="price" step="0.01" required class="border border-delta w-100 p-2">
+                              <label for="price" class="d-block mb-2">Price (in cents)</label>
+                              <input type="number" name="price" id="price" step="1" required class="border border-delta w-100 p-2">
                         </div>
                         <div class="mb-4">
                               <label for="thumbnail" class="d-block mb-2">Thumbnail</label>

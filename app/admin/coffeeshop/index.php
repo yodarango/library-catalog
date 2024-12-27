@@ -31,6 +31,10 @@ if (!is_null($coffeeId) && $_SERVER["REQUEST_METHOD"] === "POST") {
 ?>
 
 <div class="d-flex align-items-center justify-content-end">
+      <a href="/admin-coffeeshop-live-dash" class="btn btn-primary flex-shrink-0">
+            <i class="fa fa-eye color-epsilon" aria-hidden="true"></i>
+            <span class=" color-epsilon">Live orders</span>
+      </a>
       <a href="/admin-coffeeshop-coffee-add" class="btn btn-primary flex-shrink-0">
             <i class="fa fa-plus color-epsilon" aria-hidden="true"></i>
             <span class=" color-epsilon">Add new coffee</span>
@@ -59,8 +63,9 @@ if (!is_null($coffeeId) && $_SERVER["REQUEST_METHOD"] === "POST") {
                               <p class="p-0 fs-5 color-alpha">
                                     <?php echo strlen($coffee->description()) > 100 ? substr($coffee->description(), 0, 100) . '...' : $coffee->description(); ?>
                               </p>
-                              <p class="color-alpha p-0 color-zeta fs-5">
-                                    <?php echo $coffee->price(); ?>
+                              <p class="color-alpha p-0 opacity-70 fs-4">
+                                    <i class="fa fa-dollar" aria-hidden="true"></i>
+                                    <?php echo number_format(($coffee->price() / 100), 2); ?>
                               </p>
                         </div>
                   </div>

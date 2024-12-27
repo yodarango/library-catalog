@@ -22,6 +22,38 @@ $db = new Database(array(
       'user' => $username,
       'password' => $password
 ));
+
+
+// get the orders for this user
+$table = $db->table('orders');
+$orders = $table
+      ->select('*')
+      ->where('order_by', '=', $_SESSION['username'])
+      ->where('is_fulfilled', '=', 0)
+      ->all();
+
+// add the total price of the orders
+
+$total = 0;
+foreach ($orders as $order) {
+      $total += $order->item_price;
+}
+
+// add a decimal point to the total
+$total = number_format(($total / 100), 2);
+
+
+// remove an order
+if (isset($_GET['remove_order'])) {
+      $orderIdToRemove = $_GET['remove_order'];
+      try {
+            $table->where('id', '=', $orderIdToRemove)->delete();
+            header('Location: /coffeeshop');
+            echo '<div class="alert bg-success mb-4 p-4 color-beta">Order removed</div>';
+      } catch (Exception $e) {
+            echo '<div class="alert bg-danger mb-4 p-4 color-alpha">Failed to remove order</div>';
+      }
+}
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -51,13 +83,68 @@ $db = new Database(array(
 
 <body>
       <main class="main" role="main">
+            <!-- drawer opens from the right -->
+            <div>
+                  <div id="order-drawer" class="drawer drawer--right">
+                        <button class="btn bg-nu color-alpha drawer__close" onclick="closeOrderDrawer()">
+                              <i class="fa fa-times color-alpha"></i>
+                        </button>
+                        <div class="drawer__content">
+                              <div class="d-flex align-items-center justify-content-between w-100">
+                                    <h3 class="drawer__title">Your Orders</h3>
+                                    <a target="_blank" href="https://giv.li/ksmjn7">
+                                          <div class="btn py-2 px-4 bg-warning" onclick="openOrderDrawer()">
+                                                <i class="fa fa-shopping-bag color-beta"></i>
+                                                <span class="color-beta">Pay $<?= $total ?></span>
+                                          </div>
+                                    </a>
+                              </div>
+                              <ul class="order-list">
+                                    <?php foreach ($orders as $order): ?>
+                                          <li class="order-item border-bottom border-zeta py-6">
+                                                <a href="?remove_order=<?= $order->id ?>">
+                                                      <i class="fa fa-trash color-danger"></i>
+                                                </a>
+                                                <span class="order-name"><?= htmlspecialchars($order->item_name) ?></span>
+                                                <span class="order-price">$<?= number_format(($order->item_price / 100), 2) ?></span>
+
+                                          </li>
+                                    <?php endforeach; ?>
+                              </ul>
+                        </div>
+                  </div>
+            </div>
+            <script>
+                  function openOrderDrawer() {
+                        document.getElementById("order-drawer").classList.add("drawer--open");
+                  }
+
+                  function closeOrderDrawer() {
+                        document.getElementById("order-drawer").classList.remove("drawer--open");
+                  }
+            </script>
+
             <!-- header -->
             <header class="app-header d-flex align-items-center justify-content-start bg-delta">
-                  <div class="d-flex align-items-center justify-content-start w-100 column-gap-4">
-                        <a class="coffeeshop-logo flex-shrink-0" href="index">
-                              <img src="assets/icons/favicon.png" alt="coffeeshop icon ">
-                        </a>
-                        <h2 class="text-center">Coffee Shop</h2>
+                  <div class="d-flex align-items-center justify-content-between w-100 column-gap-4">
+                        <div class="app-header-label d-flex align-items-center justify-content-start w-100 column-gap-4">
+                              <a class=" coffeeshop-logo flex-shrink-0" href="index">
+                                    <img src="assets/icons/favicon.png" alt="coffeeshop icon ">
+                              </a>
+                              <h2 class="text-center">Coffee Shop</h2>
+                        </div>
+
+                        <!-- cart -->
+                        <div class="header-icon">
+                              <?php if (count($orders) > 0) { ?>
+                                    <button class="icon-badge" onclick="openOrderDrawer()">
+                                          <i class="fa fa-shopping-bag color-beta"></i>
+                                          <span class="color-beta">Pay $<?= $total ?></span>
+                                    </button>
+                              <?php } else { ?>
+                                    <i class="fa fa-shopping-bag color-alpha"></i>
+                              <?php } ?>
+                        </div>
                   </div>
             </header>
             <section class="main-content-area bg-beta">
