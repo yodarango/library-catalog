@@ -38,6 +38,6 @@ echo '👍 pulled changes from git and reset to origin'; \
 echo 'Current directory: '; pwd; \
 echo '🚢 Starting container';\
 docker-compose down; \
-docker-compose up -d; \
+docker-compose up -d;"
 
 echo "⭐️🚀✅ Deployment successful"
