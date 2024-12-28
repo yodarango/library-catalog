@@ -78,4 +78,4 @@ $orders = $db->table('orders')->select('*')->where("is_fulfilled", "=", 0)->orde
       setInterval(refreshOrders, 5000);
 </script>
 
-<?php include_once('app/snippets/app_footer.php'); ?>
+<?php include_once('app/admin/snippets/admin_footer.php') ?>
