@@ -34,15 +34,13 @@ $db = new Database(array(
       <meta name="description" content="Personal book catalog">
       <meta name="keywords" content="book, catalog">
 
-      <link href="./assets/icons/favicon.png" rel="shortcut icon"
+      <!-- <link href="./assets/icons/favicon.png" rel="shortcut icon"
             type="image/png" />
       <link href="./assets/icons/apple-touch-icon.png" rel="apple-touch-icon" />
       <link href="./assets/icons/apple-touch-icon-152x152.png" rel="apple-touch-icon" sizes="152x152" />
       <link href="./assets/icons/apple-touch-icon-167x167.png" rel="apple-touch-icon" sizes="167x167" />
-      <link href="./assets/icons/apple-touch-icon-180x180.png" rel="apple-touch-icon" sizes="180x180" />
-      <link href="./assets/icons/icon-hires.png" rel="icon" sizes="192x192" />
-      <link href="./assets/icons/icon-normal.png" rel="icon" sizes="128x128" />
-
+      <link href="./assets/icons/apple-touch-icon-180x180.png" rel="apple-touch-icon" sizes="180x180" /> -->
+      <link href="./assets/icons/logo.webp" rel="icon" sizes="128x128" />
       <link rel="stylesheet" type="text/css" href="https://cdn.danielrangel.net/fullds.min.css">
       <!-- TODO: sostituie questo con i miei iconi -->
       <link rel="stylesheet" href="assets/css/font-awesome.min.css">
@@ -56,7 +54,7 @@ $db = new Database(array(
             <header class="app-header d-flex align-items-center justify-content-start bg-delta">
                   <div class="d-flex align-items-center justify-content-between w-100 column-gap-2">
                         <a class="library-logo flex-shrink-0" href="index">
-                              <img src="assets/icons/favicon.png" alt="Library icon ">
+                              <img src="assets/icons/logo.webp" alt="Library icon ">
                         </a>
                   </div>
             </header>
