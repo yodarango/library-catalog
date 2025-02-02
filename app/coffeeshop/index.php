@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $coffee_id = $_POST['id'];
       $coffee_name = $_POST['name'];
       $coffee_price = $_POST['price'];
-      $user = $_SESSION['username'];
+      $user = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
 
       // inserisci l'ordine nella tabella orders
       $collection = $db->table('orders');
@@ -22,9 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       ));
 
       if ($affectedRows > 0) {
-            echo '<div class="alert bg-success mb-4 p-4 color-beta">Order successful</div>';
-            // reload 
-            // header('Location: coffeeshop');
+            // reload
+            header('Location: coffeeshop');
       } else {
             echo '<div class="alert bg-danger mb-4 p-4 color-alpha">Order failed</div>';
       }

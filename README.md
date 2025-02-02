@@ -1,14 +1,8 @@
-# Catalog
-
-![Meet Catalog](https://paszternak.me/catalog-app/catalog_screen8.jpg)
-
-Catalog is a PHP + MySql application to manage your home library. If you don't care about who hosts your stuff, choose LibraryThing. If you want complex, almost library-like stuff, go for OpenBiblio, Koha or Evergreen. But if you want to own your book data and you would keep it simple without all the functionalities too much for an average user, Catalog is for you.
-
-Read on, or see [the Catalog Wiki](https://github.com/psztrnk/catalog/wiki) for more information.
+# STWC
 
 ## Features
 
-With Catalog, you can
+### Library
 
 - add new books with
   - title,
@@ -35,6 +29,33 @@ With Catalog, you can
 - protect your data from unwanted eyes with built-in authentication;
 - Hungarian users are also able to import Hungarian books' data from the Moly website (Moly API Key required).
 
+### Coffeeshop
+
+- add new coffee
+- edit coffee
+- manage coffee
+- delete coffee
+
+### Prayer list
+
+- add new prayer request
+- edit prayer request
+- manage prayer request
+- archive prayer request
+
+### Office bookings
+
+- request hour slots for the ministers office
+
+### Admin
+
+- manage the library, coffee, office bookings, and prayer requests
+
+### Public Website
+
+- access manage the library, coffee, office bookings, and prayer
+- visit the public site info
+
 ## Requirements
 
 - PHP 8.0+
@@ -46,6 +67,14 @@ With Catalog, you can
 2. Rename the app accordingly
 3. `docker-composer up -d`
 4. Done
+
+### backups
+
+run `transfer_db_to_local.sh` to copy the docker data to local folder
+
+### Deployment
+
+run `./deploy.sh`
 
 ## Third-party code
 

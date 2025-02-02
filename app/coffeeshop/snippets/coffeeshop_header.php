@@ -34,6 +34,12 @@ if (isset($_SESSION['username'])) {;
             ->where('order_by', '=', $_SESSION['username'])
             ->where('is_fulfilled', '=', 0)
             ->all();
+} else {
+      // set a random id in the session for the guest user
+      if (!isset($_SESSION['guest_id'])) {
+            $_SESSION['is_guest'] = true;
+            $_SESSION['username'] = 'guest' . uniqid();
+      }
 }
 // add the total price of the orders
 

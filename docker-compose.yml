@@ -1,22 +1,22 @@
 version: "3.8"
 services:
-  library-catalog:
+  stwc_web:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: library-catalog
+    container_name: stwc_web
     ports:
       - "8080:80"
     volumes:
       - .:/var/www/html
     depends_on:
-      - db
+      - stwc_db
     env_file:
       - .env
 
-  db:
+  stwc_db:
     image: mariadb:10.5
-    container_name: library-catalog-db
+    container_name: stwc_db
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
