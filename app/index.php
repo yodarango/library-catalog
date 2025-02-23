@@ -4,8 +4,25 @@ include_once('config/config.php');
 include_once('toolkit/bootstrap.php');
 include_once('snippets/logged-in.php');
 
+// Funzione per generare un token CSRF
+function generate_csrf_token() {
+    return bin2hex(random_bytes(32));
+}
+
+// Genera un token CSRF se non esiste già
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = generate_csrf_token();
+}
+
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+      if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        echo 'Invalid CSRF token.';
+        exit;
+      }
+
       $name = trim($_POST['name']);
       $email = trim($_POST['email']);
       $phone = trim($_POST['phone']);
@@ -40,6 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       } else {
             echo 'Failed to submit prayer request. Please try again.';
       }
+
+      $_SESSION['csrf_token'] = generate_csrf_token();
 }
 ?>
 <!DOCTYPE html>
@@ -120,6 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </button>
                         <h4>Submit Prayer Request</h4>
                         <form id="prayerRequestForm">
+                               <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                               <label for="name">Name:</label>
                               <input type="text" id="name" name="name" required maxlength="50">
                               <!-- <label for="phone">Phone:</label>
